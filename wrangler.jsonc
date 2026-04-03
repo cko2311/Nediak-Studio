@@ -8,5 +8,15 @@
   },
   "observability": {
     "enabled": true
-  }
+  },
+  "routes": [
+    {
+      "pattern": "nediakstudio.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.nediakstudio.com",
+      "custom_domain": true
+    }
+  ]
 }
