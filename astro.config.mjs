@@ -9,7 +9,7 @@ export default defineConfig({
   site: "https://www.nediakstudio.com",
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss()]
   },
 
   fonts: [
@@ -22,10 +22,10 @@ export default defineConfig({
           {
             src: ["./src/assets/fonts/PPRightGrotesk-CompactBlack.woff2"],
             weight: [900],
-            style: "normal",
-          },
-        ],
-      },
+            style: "normal"
+          }
+        ]
+      }
     },
     {
       provider: fontProviders.local(),
@@ -36,10 +36,10 @@ export default defineConfig({
           {
             src: ["./src/assets/fonts/PPNeueMontreal-Medium.woff2"],
             weight: [500],
-            style: "normal",
-          },
-        ],
-      },
+            style: "normal"
+          }
+        ]
+      }
     },
     {
       provider: fontProviders.local(),
@@ -50,10 +50,10 @@ export default defineConfig({
           {
             src: ["./src/assets/fonts/PPNeueMontreal-Regular.woff2"],
             weight: [400],
-            style: "normal",
-          },
-        ],
-      },
+            style: "normal"
+          }
+        ]
+      }
     },
 
     {
@@ -65,16 +65,24 @@ export default defineConfig({
           {
             src: ["./src/assets/fonts/PPNeueMontrealMono-Medium.woff2"],
             weight: [500],
-            style: "normal",
-          },
-        ],
-      },
-    },
+            style: "normal"
+          }
+        ]
+      }
+    }
   ],
 
-  adapter: cloudflare(),
+  // Change "static" to "hybrid" to allow for edge features like Image Resizing
   output: "static",
+
   adapter: cloudflare({
+    // This tells Astro to use Cloudflare's native CDN resizing
     imageService: "cloudflare",
-  }),
+
+    // Remember to match the name you just set in wrangler.jsonc!
+    runtime: {
+      mode: "advanced",
+      binding: "STUDIO_ASSETS"
+    }
+  })
 });
