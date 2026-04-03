@@ -72,11 +72,8 @@ export default defineConfig({
     }
   ],
 
-  // Change "static" to "hybrid" to allow for edge features like Image Resizing
   output: "static",
-
   adapter: cloudflare({
-    // This tells Astro to use Cloudflare's native CDN resizing
-    imageService: "cloudflare"
+    imageService: "cloudflare" // Uses the global Cloudflare resizing service
   })
 });
