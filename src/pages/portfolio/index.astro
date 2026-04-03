@@ -1,0 +1,104 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import H1Animate from "@/components/H1Animate.astro";
+import HeroCopyAnimate from "@/components/HeroCopyAnimate.astro";
+import ScrollHtagAnimate from "@/components/ScrollHtagAnimate.astro";
+import CopyTextAnimate from "@/components/CopyTextAnimate.astro";
+import { Image } from "astro:assets";
+import PortfolioCard from "@/components/PortfolioCard.astro";
+import emy from "@/assets/images/portfolio/emy/nediak-studio-portfolio-east-meets-young.webp";
+import aoa from "@/assets/images/portfolio/aoa/nediak-studio-portfolio-art-of-anatomy-fit.webp";
+import bvdc from "@/assets/images/portfolio/bvdc/nediak-studio-portfolio-blue-violet-design-co.webp";
+import pb from "@/assets/images/portfolio/prr/nediak-studio-portfolio-the-plaza-on-brickell-miami.webp";
+const pageCanonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const seoProps = {
+  title: "Portfolio | Nediak Studio",
+  description:
+    "View our portfolio. Web design and development focused on helping brands modernize their digital footprint.",
+  canonical: pageCanonicalUrl,
+};
+---
+
+<Layout seo={seoProps}>
+  <section class="w-full h-svh grid place-items-center relative">
+    <div class="space-y-10 px-fluid-md md:px-fluid-xl z-3 w-full">
+      <div>
+        <H1Animate class="text-fluid-7xl font-black max-w-[12ch] uppercase">
+          Our Portfolio <span class="text-dark/60">View Now</span>
+          <span slot="sr" class="sr-only"> Our Portfolio View Now </span>
+        </H1Animate>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div
+          class="col-span-full md:col-start-7 md:col-end-13 lg:col-start-8 overflow-clip"
+        >
+          <HeroCopyAnimate
+            class="w-full md:w-[25ch] text-fluid-2xl p-large font-neueMed"
+          >
+            Check out all the latest projects from Nediak Studio
+            <span slot="sr" class="sr-only"
+              >Check out all the latest projects from Nediak Studio</span
+            >
+          </HeroCopyAnimate>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="pb-fluid-3xl md:pb-fluid-4xl">
+    <div class="px-fluid-md md:px-fluid-xl space-y-16 md:space-y-32">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-16">
+        <div class="col-span-full md:col-span-7">
+          <PortfolioCard
+            src={emy}
+            alt="east meets young original peanut sauce"
+            url="/portfolio/east-meets-young"
+            client="East Meets Young"
+            industry="Condiment & Food"
+            width={emy.width}
+            height={emy.height}
+            fit="cover"
+            imageClass="h-full w-full"
+          />
+        </div>
+        <div class="col-span-full md:col-span-5">
+          <PortfolioCard
+            src={aoa}
+            alt="art of anatomy fitness"
+            url="/portfolio/art-of-anatomy"
+            client="Art Of Anatomy"
+            industry="Health & Fitness"
+            width={aoa.width}
+            height={aoa.height}
+            fit="cover"
+            imageClass="h-full w-full"
+          />
+        </div>
+        <div class="col-span-full md:col-span-5">
+          <PortfolioCard
+            src={pb}
+            alt="the plaza on brickell"
+            client="Pine River Realty"
+            industry="Real Estate - Case Study Coming Soon"
+            width={pb.width}
+            height={pb.height}
+            fit="cover"
+            imageClass="h-full w-full"
+          />
+        </div>
+        <div class="col-span-full md:col-span-7">
+          <PortfolioCard
+            src={bvdc}
+            alt="blue violet design co."
+            client="Blue Violet Design Co."
+            industry="Creative Arts - Case Study Coming Soon"
+            width={bvdc.width}
+            height={bvdc.height}
+            fit="cover"
+            imageClass="h-full w-full"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

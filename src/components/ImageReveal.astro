@@ -1,0 +1,71 @@
+---
+import { Image } from "astro:assets";
+import { type ImageMetadata } from "astro";
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  width: number;
+  height: number;
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  class: containerClass = "h-auto w-full",
+} = Astro.props;
+---
+
+<div class={`image-reveal-container overflow-hidden ${containerClass}`}>
+  <Image
+    src={src}
+    width={width}
+    height={height}
+    alt={alt}
+    fit="cover"
+    loading="lazy"
+    class="image-to-animate h-full w-full rounded-md"
+  />
+</div>
+
+<script>
+  import { gsap, ScrollTrigger } from "@/lib/gsap";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Select all image containers
+    const containers = document.querySelectorAll(".image-reveal-container");
+
+    containers.forEach((container) => {
+      const image = container.querySelector(".image-to-animate");
+
+      if (image) {
+        // Define the starting (hidden) and ending (revealed) clip-path polygons
+        // Example: Vertical wipe from top
+        const clipPathStart = "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)"; // Hidden at top edge
+        const clipPathEnd = "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)"; // Fully revealed
+
+        // Set the initial clip-path for the animation start
+        gsap.set(container, {
+          clipPath: clipPathStart,
+          willChange: "clip-path",
+        });
+
+        // Create the ScrollTrigger animation
+        gsap.to(container, {
+          clipPath: clipPathEnd,
+          duration: 1.25,
+          delay: 0.75,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: container,
+            start: "top 85%", // Starts when the container top is 85% down the viewport
+            end: "bottom 20%",
+          },
+        });
+      }
+    });
+  });
+</script>

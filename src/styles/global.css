@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: oklch(0.72 0.18 45);
+  --color-brand-accent-green: oklch(0.72 0.18 145);
+  --color-brand-accent-blue: oklch(0.72 0.18 250);
+  --color-brand-accent-rose: oklch(0.72 0.18 355);
+  --color-light: oklch(0.9911 0 0);
+  --color-dark: oklch(0.1867 0 0);
+  --color-neutral: oklch(73.48% 0 0);
+  --color-copy: oklch(0.46 0 0);
+  --text-fluid-xs: clamp(0.625rem, 0.57rem + 0.33vw, 0.875rem);
+  --text-fluid-sm: clamp(0.75rem, 0.69rem + 0.33vw, 1rem);
+  --text-fluid-base: clamp(0.875rem, 0.81rem + 0.33vw, 1.125rem);
+  --text-fluid-lg: clamp(1rem, 0.93rem + 0.33vw, 1.25rem);
+  --text-fluid-xl: clamp(1.125rem, 1.02rem + 0.52vw, 1.5rem);
+  --text-fluid-2xl: clamp(1.25rem, 1.08rem + 0.85vw, 1.875rem);
+  --text-fluid-3xl: clamp(1.5rem, 1.3rem + 1vw, 2.25rem);
+  --text-fluid-4xl: clamp(1.75rem, 1.4rem + 1.7vw, 3rem);
+  --text-fluid-5xl: clamp(2rem, 1.5rem + 2.4vw, 3.75rem);
+  --text-fluid-6xl: clamp(2.5rem, 1.95rem + 2.7vw, 4.5rem);
+  --text-fluid-7xl: clamp(3rem, 1.8rem + 6vw, 7.5rem);
+  --text-fluid-8xl: clamp(3.5rem, 1.7rem + 8.8vw, 10rem);
+  --text-fluid-9xl: clamp(4rem, 1.6rem + 11.5vw, 12.5rem);
+  /* Small */
+  --spacing-fluid-3xs: clamp(0.125rem, 0.107rem + 0.089vw, 0.1875rem);
+  --spacing-fluid-2xs: clamp(0.25rem, 0.214rem + 0.179vw, 0.375rem);
+  --spacing-fluid-xs: clamp(0.5rem, 0.464rem + 0.179vw, 0.625rem);
+
+  /* Medium */
+  --spacing-fluid-sm: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  --spacing-fluid-md: clamp(1.25rem, 1.107rem + 0.714vw, 1.75rem);
+  --spacing-fluid-lg: clamp(2rem, 1.786rem + 1.071vw, 2.75rem);
+
+  /* Large */
+  --spacing-fluid-xl: clamp(3.125rem, 2.768rem + 1.786vw, 4.375rem);
+  --spacing-fluid-2xl: clamp(5rem, 4.464rem + 2.679vw, 6.875rem);
+  --spacing-fluid-3xl: clamp(8rem, 7.143rem + 4.286vw, 11rem);
+  --spacing-fluid-4xl: clamp(12rem, 10.571rem + 7.143vw, 17rem);
+  --spacing-fluid-5xl: clamp(18rem, 16.286rem + 8.571vw, 24rem);
+}
+
+@theme inline {
+  --font-display: var(--font-rightGrotesk);
+  --font-sans: var(--font-neueReg);
+  --font-mono: var(--font-neueMono);
+  --font-neueMed: var(--font-neueMed);
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    width: 100%;
+    height: auto;
+    overflow-x: hidden;
+    color: var(--color-copy);
+    font-family: var(--font-neueReg);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+
+  @media screen and (prefers-reduced-motion: no-preference) {
+    @view-transition {
+      navigation: auto;
+    }
+  }
+
+  header,
+  footer {
+    view-transition-name: none !important;
+  }
+
+  @keyframes move-out {
+    from {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-35%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes move-in {
+    from {
+      clip-path: inset(100% 0 0 0);
+    }
+    to {
+      clip-path: inset(0% 0 0 0);
+    }
+  }
+
+  /* Applying Animations to Pseudo-elements */
+  ::view-transition-old(root) {
+    animation: 1.25s cubic-bezier(0.87, 0, 0.13, 1) both move-out;
+  }
+
+  ::view-transition-new(root) {
+    animation: 1.25s cubic-bezier(0.87, 0, 0.13, 1) both move-in;
+  }
+
+  /* Global Transition Resets */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    height: 100%;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply leading-none font-display uppercase text-dark -tracking-[.015em];
+  }
+
+  h2 {
+    @apply text-fluid-6xl;
+  }
+  p {
+    @apply leading-[1.8] text-fluid-lg text-pretty;
+  }
+  .p-large {
+    @apply leading-tight;
+  }
+
+  .faq .accordion-content {
+    @apply text-copy;
+  }
+}

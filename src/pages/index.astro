@@ -1,11 +1,403 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import H1Animate from "@/components/H1Animate.astro";
+import CopyTextAnimate from "@/components/CopyTextAnimate.astro";
+import ScrollHtagAnimate from "@/components/ScrollHtagAnimate.astro";
+import HeroCopyAnimate from "@/components/HeroCopyAnimate.astro";
+import LinkButton from "@/components/LinkButton.astro";
+import { Image } from "astro:assets";
+import PortfolioCard from "@/components/PortfolioCard.astro";
+import emy from "@/assets/images/portfolio/emy/nediak-studio-portfolio-east-meets-young.webp";
+import aoa from "@/assets/images/portfolio/aoa/nediak-studio-portfolio-art-of-anatomy-fit.webp";
+import bvdc from "@/assets/images/portfolio/bvdc/nediak-studio-portfolio-blue-violet-design-co.webp";
+import pb from "@/assets/images/portfolio/prr/nediak-studio-portfolio-the-plaza-on-brickell-miami.webp";
+import heroBG from "@/assets/images/home/nediak-studio-hero-image-home.webp";
+import HeroCopyAnimate from "@/components/HeroCopyAnimate.astro";
+const pageCanonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const seoProps = {
+  title: "Premium Website Design and Development Studio | Nediak Studio",
+  description:
+    "Nediak Studio provides web design and development services focused on helping brands modernize their digital footprint.",
+  canonical: pageCanonicalUrl,
+};
 ---
 
-<Layout>
-	<Welcome />
+<Layout seo={seoProps}>
+  <section
+    class="w-full h-svh flex justify-center items-center relative overflow-hidden"
+  >
+    <Image
+      src={heroBG}
+      alt="nediak studio hero background image"
+      class="absolute w-full h-full inset-0 object-cover z-1 object-center md:object-top"
+      loading="eager"
+      fetchpriority="high"
+    />
+
+    <div class="space-y-10 px-fluid-md md:px-fluid-xl z-3 w-full">
+      <div>
+        <H1Animate class="text-fluid-7xl uppercase"
+          >Where Brands <br /><span class="text-dark/60">Meet Ambition</span>
+          <span slot="sr" class="sr-only"> Where Brands Meet Ambitions </span>
+        </H1Animate>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div
+          class="col-span-full md:col-start-7 md:col-end-13 lg:col-start-8 overflow-clip"
+        >
+          <HeroCopyAnimate
+            class="w-full text-balance md:w-[35ch] text-fluid-2xl p-large font-neueMed"
+          >
+            A digital web design studio giving form to new ideas
+            <span slot="sr" class="sr-only">
+              A digital web design studio giving form to new ideas
+            </span>
+          </HeroCopyAnimate>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section
+    class="bg-dark text-light py-fluid-3xl md:py-fluid-4xl w-full relative"
+  >
+    <div class="px-fluid-md md:px-fluid-xl space-y-32">
+      <div>
+        <CopyTextAnimate
+          indent={true}
+          class="text-fluid-3xl p-large text-light"
+        >
+          We craft premium websites for startups that turns heads. Great brands
+          aren’t built on trends, they’re built on truths. We help ambitious
+          teams find their center, turning quiet potential into loud, visual
+          narratives that resonate with the people who matter most.
+          <span slot="sr" class="sr-only"
+            >We craft premium websites for startups that turns heads. Great
+            brands aren’t built on trends, they’re built on truths. We help
+            ambitious teams find their center, turning quiet potential into
+            loud, visual narratives that resonate with the people who matter
+            most.
+          </span>
+        </CopyTextAnimate>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div class="col-span-full md:col-start-7 md:col-end-13 space-y-16">
+          <div class="space-y-3">
+            <ScrollHtagAnimate class="uppercase text-fluid-3xl text-light"
+              >Web Design & Development
+
+              <span slot="sr" class="sr-only">Web Design & Development</span>
+            </ScrollHtagAnimate>
+            <CopyTextAnimate class="text-light">
+              We create professional, engaging, and highly functional websites
+              tailored to your business goals. Our focus is primarily on
+              WordPress, leveraging its power and flexibility to build
+              beautiful, easy-to-manage sites. However, we understand that one
+              size doesn't fit all, so we also offer alternative development
+              options to match specific technical needs or platform preferences.
+              <span slot="sr" class="sr-only"
+                >We create professional, engaging, and highly functional
+                websites tailored to your business goals. Our focus is primarily
+                on WordPress, leveraging its power and flexibility to build
+                beautiful, easy-to-manage sites. However, we understand that one
+                size doesn't fit all, so we also offer alternative development
+                options to match specific technical needs or platform
+                preferences.
+              </span>
+            </CopyTextAnimate>
+          </div>
+          <div class="space-y-3">
+            <ScrollHtagAnimate class="uppercase text-fluid-3xl text-light"
+              >Search Optimization
+              <span slot="sr" class="sr-only">Search Optimization</span>
+            </ScrollHtagAnimate>
+            <CopyTextAnimate class="text-light">
+              Get found by your ideal customers online. Our comprehensive Search
+              Engine Optimization (SEO) services are designed to boost your
+              visibility in search results, driving relevant, high-quality
+              traffic to your website. We offer a full spectrum of optimization
+              services, including, On-Page SEO: Optimizing your website's
+              content, structure, and technical elements to meet search engine
+              standards. Off-Page SEO: Building authority and trust for your
+              site through strategies like high-quality link building, local
+              SEO, and online mentions.
+              <span slot="sr" class="sr-only"
+                >Get found by your ideal customers online. Our comprehensive
+                Search Engine Optimization (SEO) services are designed to boost
+                your visibility in search results, driving relevant,
+                high-quality traffic to your website. We offer a full spectrum
+                of optimization services, including, On-Page SEO: Optimizing
+                your website's content, structure, and technical elements to
+                meet search engine standards. Off-Page SEO: Building authority
+                and trust for your site through strategies like high-quality
+                link building, local SEO, and online mentions.
+              </span>
+            </CopyTextAnimate>
+          </div>
+          <div class="space-y-3">
+            <ScrollHtagAnimate class="uppercase text-fluid-3xl text-light"
+              >Branding & Strategy
+              <span slot="sr" class="sr-only">Branding & Strategy</span>
+            </ScrollHtagAnimate>
+            <CopyTextAnimate class="text-light">
+              Your brand is more than just a logo, it's the complete identity
+              and experience you offer. We help you define, design, and
+              articulate a powerful brand that resonates with your target
+              audience and stands out from the competition. Our brand
+              development services include Logo Design: Creating a distinctive
+              visual mark that represents your business. Branding Guides:
+              Developing detailed guidelines to ensure consistency across all
+              your communications (color palettes, typography, voice, etc.).
+              Brand Mood & Direction: Defining the core personality, visual
+              aesthetics, and strategic positioning that will guide your brand's
+              growth and market presence.
+              <span slot="sr" class="sr-only"
+                >Your brand is more than just a logo, it's the complete identity
+                and experience you offer. We help you define, design, and
+                articulate a powerful brand that resonates with your target
+                audience and stands out from the competition. Our brand
+                development services include Logo Design: Creating a distinctive
+                visual mark that represents your business. Branding Guides:
+                Developing detailed guidelines to ensure consistency across all
+                your communications (color palettes, typography, voice, etc.).
+                Brand Mood & Direction: Defining the core personality, visual
+                aesthetics, and strategic positioning that will guide your
+                brand's growth and market presence.
+              </span>
+            </CopyTextAnimate>
+          </div>
+          <div class="space-y-3">
+            <ScrollHtagAnimate class="uppercase text-fluid-3xl text-light"
+              >AI Consulting
+              <span slot="sr" class="sr-only">AI Consulting</span>
+            </ScrollHtagAnimate>
+            <CopyTextAnimate class="text-light">
+              We bridge the gap between "using AI" and operating with AI. In
+              todays business landscape, efficiency isn't just about speed, it’s
+              about authority. We help ambitious brands automate the everyday
+              stuff so they can focus on the business. We focus deeply on
+              optimization for the era of generative search. We want to ensure
+              your business is both efficient and highly visible.
+              <span slot="sr" class="sr-only"
+                >We bridge the gap between "using AI" and operating with AI. In
+                todays business landscape, efficiency isn't just about speed,
+                it’s about authority. We help ambitious brands automate the
+                everyday stuff so they can focus on the business. We focus
+                deeply on optimization for the era of generative search. We want
+                to ensure your business is both efficient and highly visible.
+              </span>
+            </CopyTextAnimate>
+          </div>
+          <div>
+            <LinkButton text="Our Studio" url="/studio" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div
+      class="px-fluid-md md:px-fluid-xl py-fluid-3xl md:py-fluid-4xl space-y-16 md:space-y-32"
+    >
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+        <div class="col-span-full md:col-span-6">
+          <ScrollHtagAnimate
+            class="text-fluid-6xl uppercase font-bold w-[10ch]"
+          >
+            Featured Projects
+            <span slot="sr" class="sr-only">Featured Projects </span>
+          </ScrollHtagAnimate>
+        </div>
+        <div class="col-span-full md:col-span-6">
+          <div class="space-y-8">
+            <CopyTextAnimate class="text-fluid-3xl p-large"
+              >A curated selection of projects where strategy, design, and craft
+              come together to create impact.
+              <span slot="sr" class="sr-only"
+                >A curated selection of projects where strategy, design, and
+                craft come together to create impact.
+              </span>
+            </CopyTextAnimate>
+            <CopyTextAnimate class="uppercase font-display"
+              >from vision to reality
+              <span slot="sr" class="sr-only">from vision to reality </span>
+            </CopyTextAnimate>
+            <CopyTextAnimate class="text-fluid-lg"
+              >Structure born from intention, polished into design, and hardened
+              into reality through code.
+              <span slot="sr" class="sr-only"
+                >Structure born from intention, polished into design, and
+                hardened into reality through code.
+              </span>
+            </CopyTextAnimate>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-16">
+        <div class="col-span-full md:col-span-7">
+          <PortfolioCard
+            src={emy}
+            alt="east meets young original peanut sauce"
+            url="/portfolio/east-meets-young"
+            client="East Meets Young"
+            industry="Condiment & Food"
+            width={emy.width}
+            height={emy.height}
+            fit="cover"
+            imageClass="h-full w-full"
+          />
+        </div>
+        <div class="col-span-full md:col-span-5">
+          <PortfolioCard
+            src={aoa}
+            alt="art of anatomy fitness"
+            url="/portfolio/art-of-anatomy"
+            client="Art Of Anatomy"
+            industry="Health & Fitness"
+            width={aoa.width}
+            height={aoa.height}
+            fit="cover"
+            imageClass="h-full w-full"
+          />
+        </div>
+        <div class="col-span-full md:col-span-5">
+          <PortfolioCard
+            src={pb}
+            alt="the plaza on brickell"
+            client="Pine River Realty"
+            industry="Real Estate - Case Study coming soon"
+            width={pb.width}
+            height={pb.height}
+            fit="cover"
+            imageClass="h-full w-full"
+          />
+        </div>
+        <div class="col-span-full md:col-span-7">
+          <PortfolioCard
+            src={bvdc}
+            alt="blue violet design co."
+            client="Blue Violet Design Co."
+            industry="Creative Arts - Case Study coming soon"
+            width={bvdc.width}
+            height={bvdc.height}
+            fit="cover"
+            imageClass="h-full w-full"
+          />
+        </div>
+      </div>
+      <div class="w-fit mx-auto">
+        <LinkButton text="view more projects" url="/portfolio" />
+      </div>
+    </div>
+  </section>
+  <section class="pb-fluid-3xl md:pb-fluid-4xl">
+    <div class="w-full px-fluid-md md:px-fluid-xl space-y-4 md:space-y-10">
+      <div class="text-fluid-6xl">
+        <ScrollHtagAnimate>
+          Our Process
+          <span slot="sr" class="sr-only">Our Process</span>
+        </ScrollHtagAnimate>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-16">
+        <div class="cols-span-full md:col-span-3 space-y-10 order-1 md:order-0">
+          <div class="space-y-6 text-fluid-xl">
+            <div class="border-b border-b-neutral">
+              <ScrollHtagAnimate level={3} class="text-fluid-lg">
+                (01) Introduction
+                <span slot="sr" class="sr-only">(01) Introduction</span>
+              </ScrollHtagAnimate>
+            </div>
+            <div class="border-b border-b-neutral">
+              <ScrollHtagAnimate level={3} class="text-fluid-lg">
+                (02) Discovery
+                <span slot="sr" class="sr-only">(02) Discovery</span>
+              </ScrollHtagAnimate>
+            </div>
+            <div class="border-b border-b-neutral">
+              <ScrollHtagAnimate level={3} class="text-fluid-lg">
+                (03) Design
+                <span slot="sr" class="sr-only">(03) Design</span>
+              </ScrollHtagAnimate>
+            </div>
+            <div class="border-b border-b-neutral">
+              <ScrollHtagAnimate level={3} class="text-fluid-lg">
+                (04) Development
+                <span slot="sr" class="sr-only">(04) Development</span>
+              </ScrollHtagAnimate>
+            </div>
+            <div class="border-b border-b-neutral">
+              <ScrollHtagAnimate level={3} class="text-fluid-lg">
+                (05) Optimization
+                <span slot="sr" class="sr-only">(05) Optimization</span>
+              </ScrollHtagAnimate>
+            </div>
+            <div class="border-b border-b-neutral">
+              <ScrollHtagAnimate level={3} class="text-fluid-lg">
+                (06) Launch
+                <span slot="sr" class="sr-only">(06) Launch</span>
+              </ScrollHtagAnimate>
+            </div>
+          </div>
+
+          <div>
+            <LinkButton text="Learn More" url="/process" />
+          </div>
+        </div>
+        <div class="col-span-full md:col-start-5 md:col-end-13">
+          <CopyTextAnimate indent={true} class="text-fluid-3xl p-large">
+            Our approach at Nediak Studio is designed to make you journey from
+            concept to launch as smooth and simple as possible. With our 6-stage
+            process, we prioritise clarity, collaboration, and your unique
+            vision. At every step, we'll keep you informed, inspired, and
+            involved.
+            <span slot="sr" class="sr-only"
+              >Our approach at Nediak Studio is designed to make you journey
+              from concept to launch as smooth and simple as possible. With our
+              6-stage process, we prioritise clarity, collaboration, and your
+              unique vision. At every step, we'll keep you informed, inspired,
+              and involved.</span
+            >
+          </CopyTextAnimate>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="bg-dark mb-fluid-3xl md:mb-fluid-4xl py-16 md:py-32">
+    <div class="mx-auto w-[90%] space-y-10">
+      <div>
+        <CopyTextAnimate class="text-light text-center text-3xl text-balance">
+          "I've known Chris since we were kids, and he's always been open and
+          honest. When I founded my company East Meets Young, I knew I needed an
+          e-commerce website, but I didn't know where to begin. Chris was able
+          to guide me through the whole process, and made everything easy for me
+          to understand. If you are in need of a website, I would highly
+          recommend Chris! He does right by who he works with and will deliver a
+          quality product."
+          <span slot="sr" class="sr-only"
+            >"I've known Chris since we were kids, and he's always been open and
+            honest. When I founded my company East Meets Young, I knew I needed
+            an e-commerce website, but I didn't know where to begin. Chris was
+            able to guide me through the whole process, and made everything easy
+            for me to understand. If you are in need of a website, I would
+            highly recommend Chris! He does right by who he works with and will
+            deliver a quality product."</span
+          >
+        </CopyTextAnimate>
+      </div>
+      <div class="mx-auto flex w-fit items-center gap-8">
+        <div class="flex flex-col">
+          <CopyTextAnimate class="text-light text-base">
+            Brian Young
+            <span slot="sr" class="sr-only">Brian Young</span>
+          </CopyTextAnimate>
+
+          <CopyTextAnimate class="text-neutral text-base">
+            Founder at East Meets Young
+            <span slot="sr" class="sr-only">Founder at East Meets Young</span>
+          </CopyTextAnimate>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>

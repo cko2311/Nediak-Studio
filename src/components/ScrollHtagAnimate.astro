@@ -1,0 +1,102 @@
+---
+interface Props {
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
+  class?: string;
+}
+
+const { level = 2, class: className } = Astro.props;
+const Tag = `h${level}`;
+---
+
+<Tag class={`scroll-heading relative ${className || ""}`}>
+  <!-- Animated visual text (hidden from screen readers) -->
+  <span
+    class="scroll-heading-item"
+    aria-hidden="true"
+    style="opacity:0;visibility:hidden"
+  >
+    <slot />
+  </span>
+
+  <!-- Accessible static text -->
+  <slot name="sr" />
+</Tag>
+
+<style>
+  .scroll-heading {
+    position: relative;
+    display: inline-block;
+  }
+
+  .scroll-heading-item {
+    overflow: hidden;
+    display: inline-block;
+    font-kerning: none;
+    text-rendering: optimizeSpeed;
+    will-change: transform;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+
+<script>
+  import { gsap, SplitText, DURATION, EASE, ScrollTrigger } from "@/lib/gsap";
+
+  // 1. Keep context outside the function to persist across navigation
+  let headingCtx;
+
+  const runScrollHeadingAnimation = () => {
+    // 2. CLEANUP: Revert previous instances and kill dead ScrollTriggers
+    if (headingCtx) headingCtx.revert();
+
+    headingCtx = gsap.context(() => {
+      const scrollHeadingItems = gsap.utils.toArray(".scroll-heading-item");
+
+      scrollHeadingItems.forEach((element: any) => {
+        // Ensure the element is ready for animation
+        gsap.set(element, { opacity: 1, visibility: "visible" });
+
+        const scrollSplitText = SplitText.create(element, {
+          types: "lines",
+          mask: "lines",
+          autoSplit: true,
+          // 3. Re-run animation logic on split (essential for responsive resizing)
+          onSplit: (self) => {
+            gsap.set(self.lines, { yPercent: 200 });
+
+            // Return the animation so it is scoped to the context and SplitText lifecycle
+            return gsap.to(self.lines, {
+              scrollTrigger: {
+                trigger: element,
+                start: "top 90%",
+                // toggleActions: "play none none none"
+              },
+              yPercent: 0,
+              duration: DURATION,
+              ease: "expo.out",
+              stagger: 0.075,
+            });
+          },
+        });
+      });
+    });
+
+    // 4. REFRESH: Crucial for "Back" navigation to recalculate new page scroll offsets
+    ScrollTrigger.refresh();
+  };
+
+  // 5. LIFECYCLE: Standardize on astro:page-load for View Transitions
+  document.addEventListener("DOMContentLoaded", () => {
+    document.fonts.ready.then(runScrollHeadingAnimation);
+  });
+</script>

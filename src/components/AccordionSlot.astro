@@ -1,0 +1,93 @@
+---
+interface Props {
+  title: string;
+  content?: string;
+  class?: string;
+  id?: string;
+}
+
+const { title, content, class: className = "", id: customId } = Astro.props;
+
+// generate unique id for ARIA
+const id = customId || title.toLowerCase().replace(/\s+/g, "-");
+---
+
+{/* Added 'group' here so we can target children easily */}
+<div class:list={["accordion border-b-2 group", className]}>
+  <button
+    id={`${id}-button`}
+    class="accordion-header flex w-full cursor-pointer items-center justify-between py-fluid-xs text-left text-fluid-2xl font-semibold transition-colors duration-300"
+    aria-expanded="false"
+    aria-controls={`${id}-content`}
+  >
+    <span>
+      {
+        /* The 'group-hover' and 'text-inherit' logic allows the 
+        title to take whatever color you pass to the parent 
+      */
+      }
+      <h3 class="text-inherit">
+        {title}
+      </h3>
+    </span>
+    <span class="accordion-icon transition-transform duration-300">+</span>
+  </button>
+
+  <div
+    id={`${id}-content`}
+    class="accordion-body h-0 overflow-hidden"
+    role="region"
+    aria-hidden="true"
+    aria-labelledby={`${id}-button`}
+  >
+    <div class="accordion-content pb-fluid-md text-fluid-lg">
+      <slot>
+        {content && <p>{content}</p>}
+      </slot>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { gsap, EASE } from "@/lib/gsap";
+
+  const initAccordions = () => {
+    document.querySelectorAll(".accordion").forEach((accordion) => {
+      const header = accordion.querySelector(
+        ".accordion-header",
+      ) as HTMLElement;
+      const body = accordion.querySelector(".accordion-body") as HTMLElement;
+      const icon = accordion.querySelector(".accordion-icon") as HTMLElement;
+
+      if (!header || !body || !icon) return;
+
+      let isOpen = false;
+
+      header.addEventListener("click", () => {
+        if (!isOpen) {
+          gsap.to(body, {
+            height: body.scrollHeight,
+            duration: 0.75,
+            ease: EASE,
+          });
+          icon.classList.add("rotate-45");
+          header.setAttribute("aria-expanded", "true");
+          body.setAttribute("aria-hidden", "false");
+        } else {
+          gsap.to(body, {
+            height: 0,
+            duration: 0.75,
+            ease: EASE,
+          });
+          icon.classList.remove("rotate-45");
+          header.setAttribute("aria-expanded", "false");
+          body.setAttribute("aria-hidden", "true");
+        }
+        isOpen = !isOpen;
+      });
+    });
+  };
+
+  // Runs on initial load and after every View Transition navigation
+  document.addEventListener("astro:page-load", initAccordions);
+</script>

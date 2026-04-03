@@ -1,0 +1,244 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import H1Animate from "@/components/H1Animate.astro";
+import HeroCopyAnimate from "@/components/HeroCopyAnimate.astro";
+import CopyTextAnimate from "@/components/CopyTextAnimate.astro";
+import ScrollHtagAnimate from "@/components/ScrollHtagAnimate.astro";
+import Marquee from "@/components/Marquee.astro";
+import ImageReveal from "@/components/ImageReveal.astro";
+import LinkButton from "@/components/LinkButton.astro";
+import { caseStudies } from "@/constants/caseStudies";
+
+export function getStaticPaths() {
+  // 2. Iterating over 'caseStudies' and passing each item as 'caseStudy' prop
+  return caseStudies.map((caseStudy) => ({
+    params: { caseStudySlug: caseStudy.slug },
+    props: { caseStudy },
+  }));
+}
+
+const { caseStudy } = Astro.props;
+const pageCanonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const seoProps = {
+  title: `Case Study | ${caseStudy.name}`, // Dynamic title
+  description: caseStudy.seoDescription, // Dynamic description
+  canonical: pageCanonicalUrl, // Calculated canonical URL
+  // Add other optional props like noIndex, ogImage here if needed
+};
+---
+
+<Layout seo={seoProps}>
+  <section class="flex w-full flex-col justify-center pt-fluid-3xl">
+    <div class="px-fluid-md md:px-fluid-xl z-3 w-full">
+      <div class="space-y-fluid-xs">
+        <div>
+          <HeroCopyAnimate
+            class="all-projects overflow-hidden text-fluid-lg text-copy font-semibold hover:text-brand after:bg-brand relative inline-block w-fit transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-[calc(100%-1px)] after:origin-right after:scale-x-0 after:transition-transform after:duration-400 after:ease-in after:content-[''] hover:after:origin-left hover:after:scale-x-100"
+            as="a"
+            href="/portfolio"
+          >
+            &#8592; Back To All Projects
+          </HeroCopyAnimate>
+        </div>
+        <div>
+          <H1Animate class="text-fluid-7xl">
+            {caseStudy.name}
+            <span slot="sr" class="sr-only">{caseStudy.name}</span>
+          </H1Animate>
+        </div>
+
+        <div
+          class="border-b-neutral flex flex-col items-start justify-start gap-6 border-b pb-6 md:flex-row md:items-end md:justify-between"
+        >
+          <div>
+            <div>
+              <HeroCopyAnimate class="text-fluid-lg">
+                {caseStudy.tagLine}
+                <span slot="sr" class="sr-only">{caseStudy.tagLine}</span>
+              </HeroCopyAnimate>
+            </div>
+          </div>
+          <div>
+            <HeroCopyAnimate
+              as="a"
+              href={caseStudy.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              content="Live Site ↗"
+              class="live-site text-copy text-fluid-lg hover:text-brand after:bg-brand relative inline-block w-fit transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-[calc(100%-1px)] after:origin-right after:scale-x-0 after:transition-transform after:duration-400 after:ease-in after:content-[''] hover:after:origin-left hover:after:scale-x-100"
+            >
+              Live Site &#8594;
+              <span slot="sr" class="sr-only">Live Site ↗</span>
+            </HeroCopyAnimate>
+          </div>
+        </div>
+        <div class="flex text-xl flex-row justify-between">
+          <div>
+            <HeroCopyAnimate class="font-mono uppercase text-fluid-sm">
+              {caseStudy.industry}
+              <span slot="sr" class="sr-only">{caseStudy.industry}</span>
+            </HeroCopyAnimate>
+          </div>
+          <div>
+            <HeroCopyAnimate class="font-mono uppercase text-fluid-sm">
+              {caseStudy.year}
+              <span slot="sr" class="sr-only">{caseStudy.year}</span>
+            </HeroCopyAnimate>
+          </div>
+        </div>
+        <div>
+          {
+            caseStudy.heroImg && (
+              <ImageReveal
+                src={caseStudy.heroImg}
+                alt={caseStudy.name}
+                width={caseStudy.heroImg.width}
+                height={caseStudy.heroImg.height}
+              />
+            )
+          }
+        </div>
+      </div>
+    </div>
+    <section class="py-fluid-3xl md:py-fluid-4xl">
+      <div class="px-fluid-md md:px-fluid-xl z-3 w-full">
+        <div class="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div class="flex flex-col">
+            <div>
+              <ScrollHtagAnimate class="font-neue uppercase">
+                Services
+                <span slot="sr" class="sr-only">Services</span>
+              </ScrollHtagAnimate>
+            </div>
+            <div>
+              <CopyTextAnimate>
+                {caseStudy.services}
+                <span slot="sr" class="sr-only">{caseStudy.services}</span>
+              </CopyTextAnimate>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <div>
+              <ScrollHtagAnimate class="uppercase">
+                Client
+                <span slot="sr" class="sr-only">Client</span>
+              </ScrollHtagAnimate>
+            </div>
+            <div>
+              <CopyTextAnimate>
+                {caseStudy.description}
+                <span slot="sr" class="sr-only">{caseStudy.description}</span>
+              </CopyTextAnimate>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <Marquee
+        title={caseStudy.name}
+        color={caseStudy.color}
+        bgColor={caseStudy.bgColor}
+      />
+    </section>
+    <section>
+      <div
+        class="px-fluid-md md:px-fluid-xl z-3 w-full space-y-16 py-fluid-3xl md:py-fluid-4xl"
+      >
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-16">
+          <div class="my-auto">
+            <div>
+              <ScrollHtagAnimate class="font-neue uppercase">
+                Project Brief
+                <span slot="sr" class="sr-only">Project Brief</span>
+              </ScrollHtagAnimate>
+            </div>
+            <div>
+              <CopyTextAnimate>
+                {caseStudy.brief}
+                <span slot="sr" class="sr-only">{caseStudy.brief}</span>
+              </CopyTextAnimate>
+            </div>
+          </div>
+          <div>
+            <ImageReveal
+              src={caseStudy.briefImg}
+              alt={caseStudy.name}
+              width={caseStudy.briefImg?.width}
+              height={caseStudy.briefImg?.height}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div
+        class="px-fluid-md md:px-fluid-xl z-3 w-full space-y-12 pb-fluid-3xl md:pb-fluid-4xl"
+      >
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-16">
+          <div class="my-auto">
+            <div>
+              <ScrollHtagAnimate>
+                The Problem
+                <span slot="sr" class="sr-only">The Problem</span>
+              </ScrollHtagAnimate>
+            </div>
+            <div>
+              <CopyTextAnimate>
+                {caseStudy.problem}
+                <span slot="sr" class="sr-only">{caseStudy.problem}</span>
+              </CopyTextAnimate>
+            </div>
+          </div>
+
+          <div>
+            {
+              caseStudy.probImg && (
+                <ImageReveal
+                  src={caseStudy.probImg}
+                  alt={caseStudy.name}
+                  width={caseStudy.probImg.width}
+                  height={caseStudy.probImg.height}
+                />
+              )
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div
+        class="px-fluid-md md:px-fluid-xl z-3 w-full space-y-12 pb-fluid-3xl md:pb-fluid-4xl"
+      >
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-16">
+          <div class="my-auto">
+            <div>
+              <ScrollHtagAnimate>
+                The Results
+                <span slot="sr" class="sr-only">The Results</span>
+              </ScrollHtagAnimate>
+            </div>
+            <div>
+              <CopyTextAnimate>
+                {caseStudy.results}
+                <span slot="sr" class="sr-only">{caseStudy.results}</span>
+              </CopyTextAnimate>
+            </div>
+          </div>
+          <div>
+            {
+              caseStudy.resultsImg && (
+                <ImageReveal
+                  src={caseStudy.resultsImg}
+                  alt={caseStudy.name}
+                  width={caseStudy.resultsImg.width}
+                  height={caseStudy.resultsImg.height}
+                />
+              )
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+</Layout>

@@ -1,0 +1,257 @@
+---
+import FooterLogo from "@/components/ui/FooterLogo.astro";
+
+const menuLinks = [
+  { path: "/portfolio", label: "Portfolio" },
+  { path: "/studio", label: "Studio" },
+  { path: "/process", label: "Process" },
+  { path: "/contact", label: "Contact" },
+];
+
+const socialLinks = [
+  { path: "https://x.com/vuelvedesign", label: "X(Twitter)" },
+  { path: "https://www.instagram.com/vuelvedesign/", label: "Instagram" },
+  { path: "https://www.instagram.com/vuelvedesign/", label: "LinkedIn" },
+];
+---
+
+<header
+  class="fixed top-0 left-0 w-full py-4 px-6 flex justify-between items-center mix-blend-difference text-light z-9999"
+>
+  <div class="z-9999">
+    <a href="/" id="menu-logo" class="font-bold text-xl">Logo</a>
+  </div>
+
+  <nav class="hidden md:block">
+    <ul class="flex flex-row space-x-6 font-semibold">
+      {
+        menuLinks.map((link) => (
+          <li>
+            <a href={link.path} class="hover:opacity-70 transition-opacity">
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <button
+    id="menu-toggle"
+    class="focus-visible:outline-light tracking relative h-8 w-24 overflow-hidden flex md:hidden items-center justify-end"
+    aria-expanded="false"
+    aria-controls="menu-overlay"
+    aria-label="Open menu"
+  >
+    <span
+      id="menu-open"
+      class="text-light absolute inset-0 flex cursor-pointer items-center justify-end font-semibold"
+      aria-hidden="true">Menu</span
+    >
+    <span
+      id="menu-close"
+      class="text-light absolute inset-0 flex translate-y-full cursor-pointer items-center justify-end font-semibold opacity-0"
+      aria-hidden="true">Close</span
+    >
+  </button>
+</header>
+
+<div
+  id="menu-overlay"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Site menu"
+  class="bg-dark pointer-events-none invisible fixed inset-0 z-80 origin-top-left md:hidden"
+  style="clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); transform: rotate(-10deg); opacity: 0;"
+>
+  <div class="relative flex h-full w-full flex-col justify-between p-6">
+    <div class="mt-24 flex flex-col justify-start space-y-2">
+      {
+        menuLinks.map((link) => (
+          <div class="menu-link-wrapper">
+            <a
+              href={link.path}
+              class="menu-link text-light font-sans font-semibold text-6xl uppercase inline-block opacity-0"
+              tabindex="-1"
+            >
+              {link.label}
+            </a>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="flex flex-col justify-start space-y-5 font-mono">
+      <div class="contact opacity-0">
+        <p class="text-sm uppercase text-light">Nediak Studio</p>
+        <p class="text-sm uppercase text-light">New Jersey, USA</p>
+        <p class="text-sm uppercase text-light">40.0583° N, 74.4057° W</p>
+      </div>
+      <div class="contact flex flex-col font-mono opacity-0">
+        {
+          socialLinks.map((social) => (
+            <a
+              href={social.path}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-light font-mono text-sm uppercase"
+            >
+              {social.label}
+            </a>
+          ))
+        }
+      </div>
+      <div class="contact flex flex-col font-mono opacity-0">
+        <a
+          href="mailto:hello@nediakstudio.com"
+          class="text-sm font-mono text-light uppercase"
+          >hello@nediakstudio.com</a
+        >
+        <a
+          href="tel:305-484-1906"
+          class="text-sm font-mono text-light uppercase">305-484-1906</a
+        >
+      </div>
+    </div>
+
+    <div
+      class="nav-footer flex w-full flex-row items-start justify-between opacity-0"
+    >
+      <div>
+        <p class="text-sm text-light">
+          @2026 Nediak Studio, All Rights Reserved.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { gsap } from "@/lib/gsap";
+
+  const initMenu = () => {
+    let isOpen = false;
+    let isAnimating = false;
+    let pendingUrl = null;
+
+    const toggle = document.querySelector("#menu-toggle");
+    const textLogo = document.querySelector("#menu-logo");
+    const overlay = document.querySelector("#menu-overlay");
+    const links = document.querySelectorAll(".menu-link");
+    const infoText = document.querySelectorAll(".contact");
+    const footerText = document.querySelectorAll(".nav-footer");
+    const mainContent = document.querySelector("#main-site-content");
+
+    const openLabel = document.querySelector("#menu-open");
+    const closeLabel = document.querySelector("#menu-close");
+
+    if (!toggle || !overlay) return;
+
+    // --- RESET INITIAL STATE ---
+    // Start links slightly lower and transparent
+    gsap.set(links, { y: 30, opacity: 0 });
+    gsap.set([infoText, footerText], { y: 30, opacity: 0 });
+
+    const tl = gsap.timeline({
+      paused: true,
+      onStart: () => {
+        isAnimating = true;
+        overlay.classList.remove("invisible");
+      },
+      onComplete: () => {
+        isAnimating = false;
+      },
+      onReverseComplete: () => {
+        isAnimating = false;
+        overlay.classList.add("invisible");
+        if (pendingUrl) window.location.href = pendingUrl;
+      },
+      defaults: { duration: 1.0, ease: "expo.inOut" },
+    });
+
+    // Content Push Back
+    if (mainContent) {
+      tl.to(
+        mainContent,
+        {
+          y: "12vh",
+          scale: 0.9,
+          rotationZ: 4,
+          transformOrigin: "top right",
+        },
+        0,
+      );
+    }
+
+    // Overlay Animation
+    tl.to(
+      overlay,
+      {
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+        rotationZ: 0,
+        opacity: 1,
+        pointerEvents: "all",
+      },
+      0,
+    )
+      .to(textLogo, { color: "white" }, 0)
+      .to(openLabel, { y: "-100%", opacity: 0 }, 0)
+      .to(closeLabel, { y: "0%", opacity: 1 }, 0);
+
+    // Fade and Slide In Links
+    tl.to(
+      links,
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.08,
+        duration: 0.8,
+        ease: "power3.out",
+      },
+      "-=0.6",
+    );
+
+    // Fade and Slide In Info/Footer
+    tl.to(
+      [infoText, footerText],
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.08,
+        duration: 0.7,
+        ease: "power2.out",
+      },
+      "-=0.4",
+    );
+
+    function toggleMenu(target = null) {
+      if (!isOpen) {
+        pendingUrl = null;
+        tl.play();
+        toggle.setAttribute("aria-expanded", "true");
+      } else {
+        pendingUrl = target;
+        tl.timeScale(1.8).reverse();
+        toggle.setAttribute("aria-expanded", "false");
+      }
+      isOpen = !isOpen;
+    }
+
+    toggle.addEventListener("click", () => {
+      if (isAnimating) return;
+      toggleMenu();
+    });
+
+    links.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const href = link.getAttribute("href");
+        if (href && href.startsWith("/")) {
+          e.preventDefault();
+          if (!isAnimating) toggleMenu(href);
+        }
+      });
+    });
+  };
+
+  document.addEventListener("DOMContentLoaded", initMenu);
+</script>

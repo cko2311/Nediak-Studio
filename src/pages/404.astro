@@ -1,0 +1,37 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import H1Animate from "@/components/H1Animate.astro";
+import CopyTextAnimate from "@/components/CopyTextAnimate.astro";
+import HeroCopyAnimate from "@/components/HeroCopyAnimate.astro";
+import ScrollHtagAnimate from "@/components/ScrollHtagAnimate.astro";
+import LinkButton from "@/components/LinkButton.astro";
+
+const pageCanonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const seoProps = {
+  title: "404 Page Not Found | Nediak Studio",
+  description: "404 page not found.",
+  canonical: pageCanonicalUrl,
+};
+---
+
+<Layout seo={seoProps}>
+  <section class="w-full h-svh">
+    <div
+      class="px-fluid-md md:px-fluid-xl z-3 flex h-screen w-full flex-col items-center justify-center space-y-10"
+    >
+      <H1Animate class="text-fluid-7xl"
+        >404 - Error... <span slot="sr" class="sr-only">404 - Error...</span
+        ></H1Animate
+      >
+      <HeroCopyAnimate class="text-fluid-2xl overflow-hidden text-center">
+        This is embarassing...<br />the page you are looking for does not exist
+        <span slot="sr" class="sr-only">
+          This is embarassing...the page you are looking for does not exist
+        </span>
+      </HeroCopyAnimate>
+      <div class="mx-auto w-fit">
+        <LinkButton text="Back To Home" url="/" />
+      </div>
+    </div>
+  </section>
+</Layout>

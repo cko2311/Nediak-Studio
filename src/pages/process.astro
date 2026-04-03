@@ -1,0 +1,303 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import H1Animate from "@/components/H1Animate.astro";
+import HeroCopyAnimate from "@/components/HeroCopyAnimate.astro";
+import CopyTextAnimate from "@/components/CopyTextAnimate.astro";
+import ScrollHtagAnimate from "@/components/ScrollHtagAnimate.astro";
+const pageCanonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const seoProps = {
+  title: "Process | Nediak Studio",
+  description:
+    "Contact Nediak Studio if you are looking for a website, branding, or search engine optimization for your business.",
+  canonical: pageCanonicalUrl,
+};
+---
+
+<Layout seo={seoProps}>
+  <section class="w-full h-svh grid place-items-center relative">
+    <div class="space-y-10 px-fluid-md md:px-fluid-xl z-3 w-full">
+      <div>
+        <H1Animate class="text-fluid-7xl font-black max-w-[13ch] uppercase"
+          >The Process<span class="text-dark/60">Start to Finish</span>
+          <span slot="sr" class="sr-only"> The Prcoess Start to Finish </span>
+        </H1Animate>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div
+          class="col-span-full md:col-start-7 md:col-end-13 lg:col-start-8 overflow-clip"
+        >
+          <HeroCopyAnimate
+            class="w-full md:w-[25ch] text-fluid-2xl p-large font-neueMed"
+          >
+            From strategic blueprint to digital reality. Keep it simple.
+            <span slot="sr" class="sr-only">
+              From strategic blueprint to digital reality. Keep it simple.
+            </span>
+          </HeroCopyAnimate>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="pb-fluid-3xl md:pb-fluid-4xl w-full">
+    <div class="px-fluid-md md:px-fluid-xl space-y-32 w-full">
+      <div>
+        <CopyTextAnimate indent={true} class="text-fluid-3xl p-large">
+          Nediak Studio believes the web design and development approach should
+          be a simple, straight-forward experience. Our goal is to be a trusted
+          partner who gives life to your brand through beautiful, modern,
+          functional, and highly effective digital experiences. We handle the
+          complexity so you can focus on your business.
+          <span slot="sr" class="sr-only">
+            Nediak Studio believes the web design and development approach
+            should be a simple, straight-forward experience. Our goal is to be a
+            trusted partner who gives life to your brand through beautiful,
+            modern, functional, and highly effective digital experiences. We
+            handle the complexity so you can focus on your business.
+          </span>
+        </CopyTextAnimate>
+      </div>
+    </div>
+  </section>
+  <section class="pb-fluid-3xl md:pb-fluid-4xl">
+    <div class="w-full px-fluid-md md:px-fluid-xl space-y-16 md:space-y-24">
+      <div class="relative z-10">
+        <div>
+          <ScrollHtagAnimate class="text-fluid-6xl">
+            Our 6 Step <br />Website Process <span slot="sr" class="sr-only"
+              >Our 6 Step Website Process
+            </span>
+          </ScrollHtagAnimate>
+        </div>
+        <div class="hidden w-full items-end justify-end md:flex">
+          <CopyTextAnimate class="text-dark text-fluid-6xl">
+            (↓)
+            <span slot="sr" class="sr-only">(↓) </span>
+          </CopyTextAnimate>
+        </div>
+      </div>
+      <div class="process-wrapper space-y-12">
+        <div
+          class="inner-wrapper border-b-neutral grid grid-cols-1 gap-2 border-b pb-12 md:grid-cols-[1fr_2fr]"
+        >
+          <div>
+            <ScrollHtagAnimate level={3} class="text-fluid-3xl">
+              <span class="text-text">(01)</span> Introduction <span
+                slot="sr"
+                class="sr-only"
+                >(01) Introduction
+              </span>
+            </ScrollHtagAnimate>
+          </div>
+          <div>
+            <CopyTextAnimate>
+              We don't just build websites; we build digital homes for your
+              brand. This initial phase is all about understanding your
+              business, goals, and target audience through collaborative
+              meetings, ensuring we have a complete picture of your vision.
+              <span slot="sr" class="sr-only"
+                >We don't just build websites; we build digital homes for your
+                brand. This initial phase is all about understanding your
+                business, goals, and target audience through collaborative
+                meetings, ensuring we have a complete picture of your vision.</span
+              >
+            </CopyTextAnimate>
+          </div>
+        </div>
+        <div
+          class="inner-wrapper border-b-neutral grid grid-cols-1 gap-2 border-b pb-12 md:grid-cols-[1fr_2fr]"
+        >
+          <div>
+            <ScrollHtagAnimate level={3} class="text-fluid-3xl">
+              <span class="text-text">(02)</span> Discovery <span
+                slot="sr"
+                class="sr-only"
+                >(02) Discovery
+              </span>
+            </ScrollHtagAnimate>
+          </div>
+          <div>
+            <CopyTextAnimate>
+              With a clear understanding of your vision, we'll develop a
+              comprehensive digital strategy. The strategy we build is centered
+              on your ideal customer's journey, ensuring the website isn't just
+              beautiful, but also highly effective at connecting with your
+              audience and meeting your business objectives.
+              <span slot="sr" class="sr-only"
+                >With a clear understanding of your vision, we'll develop a
+                comprehensive digital strategy. The strategy we build is
+                centered on your ideal customer's journey, ensuring the website
+                isn't just beautiful, but also highly effective at connecting
+                with your audience and meeting your business objectives.</span
+              >
+            </CopyTextAnimate>
+          </div>
+        </div>
+        <div
+          class="inner-wrapper border-b-neutral grid grid-cols-1 gap-2 border-b pb-12 md:grid-cols-[1fr_2fr]"
+        >
+          <div>
+            <ScrollHtagAnimate level={3} class="text-fluid-3xl">
+              <span class="text-text">(03)</span> Design <span
+                slot="sr"
+                class="sr-only"
+                >(03) Design
+              </span>
+            </ScrollHtagAnimate>
+          </div>
+          <div>
+            <CopyTextAnimate>
+              Every design is crafted from the ground up, ensuring a unique
+              aesthetic that truly represents your brand. We focus on creating
+              an intuitive user experience with a seamless and logical user
+              flow, making it easy for visitors to find exactly what they need.
+              Before a single line of code is written, you'll be able to review
+              and discuss allowing for feedback and refinements. The design will
+              be fully responsive and optimized for every screen size, from
+              desktop to mobile.
+              <span slot="sr" class="sr-only"
+                >Every design is crafted from the ground up, ensuring a unique
+                aesthetic that truly represents your brand. We focus on creating
+                an intuitive user experience with a seamless and logical user
+                flow, making it easy for visitors to find exactly what they
+                need. Before a single line of code is written, you'll be able to
+                review and discuss allowing for feedback and refinements. The
+                design will be fully responsive and optimized for every screen
+                size, from desktop to mobile.</span
+              >
+            </CopyTextAnimate>
+          </div>
+        </div>
+        <div
+          class="inner-wrapper border-b-neutral grid grid-cols-1 gap-2 border-b pb-12 md:grid-cols-[1fr_2fr]"
+        >
+          <div>
+            <ScrollHtagAnimate level={3} class="text-fluid-3xl">
+              <span class="text-text">(04)</span> Development <span
+                slot="sr"
+                class="sr-only"
+                >(04) Development
+              </span>
+            </ScrollHtagAnimate>
+          </div>
+          <div>
+            <CopyTextAnimate>
+              Once the design is approved, we build your website with clean,
+              scalable code that is fast, secure, and ready to grow with your
+              business. We prioritize site speed and performance to ensure a
+              smooth experience for your visitors and strong search engine
+              rankings. During this phase, you'll have access to a live staging
+              environment to watch the site come to life and provide real-time
+              feedback.
+              <span slot="sr" class="sr-only"
+                >Once the design is approved, we build your website with clean,
+                scalable code that is fast, secure, and ready to grow with your
+                business. We prioritize site speed and performance to ensure a
+                smooth experience for your visitors and strong search engine
+                rankings. During this phase, you'll have access to a live
+                staging environment to watch the site come to life and provide
+                real-time feedback.</span
+              >
+            </CopyTextAnimate>
+          </div>
+        </div>
+        <div
+          class="inner-wrapper border-b-neutral grid grid-cols-1 gap-2 border-b pb-12 md:grid-cols-[1fr_2fr]"
+        >
+          <div>
+            <ScrollHtagAnimate level={3} class="text-fluid-3xl">
+              <span class="text-text">(05)</span> Optimization <span
+                slot="sr"
+                class="sr-only"
+                >(05) Optimization
+              </span>
+            </ScrollHtagAnimate>
+          </div>
+          <div>
+            <CopyTextAnimate>
+              We ensures your website is fast, flawless, and findable. We
+              heavily focus on the key areas such as Site Speed, On-Page SEO,
+              and Technical Quality Assurance to guarantee a high-performing
+              user experience from the moment of launch.
+              <span slot="sr" class="sr-only"
+                >We ensures your website is fast, flawless, and findable. We
+                heavily focus on the key areas such as Site Speed, On-Page SEO,
+                and Technical Quality Assurance to guarantee a high-performing
+                user experience from the moment of launch.</span
+              >
+            </CopyTextAnimate>
+          </div>
+        </div>
+
+        <div
+          class="inner-wrapper grid grid-cols-1 gap-2 md:grid-cols-[1fr_2fr]"
+        >
+          <div>
+            <ScrollHtagAnimate level={3} class="text-fluid-3xl">
+              <span class="text-text">(06)</span> Launch <span
+                slot="sr"
+                class="sr-only"
+                >(06) Launch
+              </span>
+            </ScrollHtagAnimate>
+          </div>
+          <div>
+            <CopyTextAnimate>
+              We handle all the technical details of launching your site,
+              ensuring a seamless and successful transition from development to
+              live. Our relationship doesn't end at launch, as we provide
+              comprehensive training so you can manage your content with
+              confidence and offer ongoing support and maintenance to keep your
+              site secure, updated, and performing at its best. We're here to be
+              your long-term digital partner.
+              <span slot="sr" class="sr-only"
+                >We handle all the technical details of launching your site,
+                ensuring a seamless and successful transition from development
+                to live. Our relationship doesn't end at launch, as we provide
+                comprehensive training so you can manage your content with
+                confidence and offer ongoing support and maintenance to keep
+                your site secure, updated, and performing at its best. We're
+                here to be your long-term digital partner.</span
+              >
+            </CopyTextAnimate>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="bg-dark mb-fluid-3xl md:mb-fluid-4xl py-16 md:py-32">
+    <div class="mx-auto w-[90%] space-y-10">
+      <div>
+        <CopyTextAnimate class="text-light text-center text-3xl text-balance">
+          "Chris absolutely nailed it. He helped design and built our website
+          from the ground up and handled all of the photography too. He really
+          took the time to understand what Art of Anatomy is all about and
+          turned that into a site that feels alive and true to our brand. We’re
+          so proud of how everything turned out. It finally feels like us
+          online!"
+          <span slot="sr" class="sr-only"
+            >"Chris absolutely nailed it. He helped design and built our website
+            from the ground up and handled all of the photography too. He really
+            took the time to understand what Art of Anatomy is all about and
+            turned that into a site that feels alive and true to our brand.
+            We’re so proud of how everything turned out. It finally feels like
+            us online!"</span
+          >
+        </CopyTextAnimate>
+      </div>
+      <div class="mx-auto flex w-fit items-center gap-8">
+        <div class="flex flex-col">
+          <CopyTextAnimate class="text-light text-base">
+            Corey Csakai
+            <span slot="sr" class="sr-only">Corey Csakai</span>
+          </CopyTextAnimate>
+
+          <CopyTextAnimate class="text-neutral text-base">
+            Founder at Art Of Anatomy
+            <span slot="sr" class="sr-only">Founder at Art Of Anatomy</span>
+          </CopyTextAnimate>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

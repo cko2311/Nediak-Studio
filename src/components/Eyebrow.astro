@@ -1,0 +1,13 @@
+---
+const { class: className } = Astro.props;
+---
+
+<div class="relative">
+  <div class="md:absolute md:left-0 md:top-3">
+    <slot name="eyebrow" />
+  </div>
+
+  <div class="indent-45">
+    <slot />
+  </div>
+</div>

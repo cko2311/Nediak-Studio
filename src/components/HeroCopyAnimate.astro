@@ -1,0 +1,117 @@
+---
+interface Props {
+  as?: "p" | "a" | "div" | "span";
+  href?: string;
+  class?: string;
+  indent?: boolean;
+}
+
+const { as = "p", href, class: className, indent = false } = Astro.props;
+const Tag = as;
+---
+
+{
+  as === "a" ? (
+    <a
+      href={href}
+      class="hero-copy opacity-0"
+      class:list={[className]}
+      aria-hidden="true"
+    >
+      {indent && <span class="indent-spacer" aria-hidden="true" />}
+      <slot />
+    </a>
+  ) : (
+    <Tag
+      class="hero-copy opacity-0 overflow-hidden "
+      class:list={[className]}
+      aria-hidden="true"
+    >
+      {indent && <span class="indent-spacer" aria-hidden="true" />}
+      <slot />
+    </Tag>
+  )
+}
+
+<slot name="sr" />
+
+<style>
+  .scroll-paragraph-item {
+    overflow: hidden;
+    font-kerning: none;
+    text-rendering: optimizeSpeed;
+    display: block;
+    will-change: transform;
+    overflow: hidden;
+  }
+
+  .indent-spacer {
+    display: none;
+  }
+
+  @media (min-width: 1040px) {
+    .indent-spacer {
+      display: inline-block;
+      width: 10rem;
+    }
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+
+<script>
+  import { gsap, SplitText } from "@/lib/gsap";
+
+  let ctx;
+
+  const runAnimation = () => {
+    // 1. CLEANUP: Revert any existing SplitText from the previous page
+    if (ctx) ctx.revert();
+
+    ctx = gsap.context(() => {
+      const elements = gsap.utils.toArray(".hero-copy");
+
+      elements.forEach((element: any) => {
+        // Create the SplitText instance
+        const split = SplitText.create(element, {
+          types: "lines",
+          mask: "lines",
+          linesClass: "line",
+          autoSplit: true,
+          onSplit: (self) => {
+            // Initial state: Hidden below the mask
+            gsap.set(self.lines, { yPercent: 200 });
+            element.classList.remove("opacity-0");
+
+            // Standard on-load tween (no ScrollTrigger)
+            const tween = gsap.to(self.lines, {
+              yPercent: 0,
+              duration: 1.5,
+              ease: "expo.out",
+              stagger: 0.075,
+              delay: 1.2,
+            });
+
+            return tween;
+          },
+        });
+      });
+    });
+  };
+
+  // 2. LIFECYCLE: Handle initial load and Astro view transitions
+  document.addEventListener("DOMContentLoaded", () => {
+    // Ensuring fonts are loaded is critical for SplitText line calculations
+    document.fonts.ready.then(runAnimation);
+  });
+</script>

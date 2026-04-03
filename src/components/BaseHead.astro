@@ -1,0 +1,73 @@
+---
+import { Font } from "astro:assets";
+import { SEO } from "astro-seo";
+import { ClientRouter } from "astro:transitions";
+export interface Props {
+  seo: {
+    title: string;
+    description: string;
+    canonical?: string;
+    noIndex?: boolean;
+    image?: string;
+  };
+}
+const { seo } = Astro.props;
+const { title, description, canonical, noIndex = false, image } = seo;
+
+// Default Open Graph / Twitter values
+const defaultOG = {
+  siteName: "Nediak Studio",
+  url: "https://www.nediakstudio.com",
+  image: "",
+  type: "website",
+  twitterHandle: "",
+};
+
+// Merge dynamic page data with defaults
+const ogTitle = title;
+const ogDescription = description;
+const ogUrl = canonical || defaultOG.url;
+const ogImage = image || defaultOG.image;
+const ogType = defaultOG.type;
+const ogSiteName = defaultOG.siteName;
+const twitterHandle = defaultOG.twitterHandle;
+---
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/" />
+  <link rel="icon" type="image/svg+xml" href="/" />
+  <meta name="generator" content={Astro.generator} />
+
+  <!-- Standard SEO -->
+  <SEO
+    title={title}
+    description={description}
+    canonical={canonical}
+    noindex={noIndex}
+  />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content={ogType} />
+  <meta property="og:title" content={ogTitle} />
+  <meta property="og:description" content={ogDescription} />
+  <meta property="og:url" content={ogUrl} />
+  <meta property="og:site_name" content={ogSiteName} />
+  <meta property="og:image" content={ogImage} />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content={twitterHandle} />
+  <meta name="twitter:title" content={ogTitle} />
+  <meta name="twitter:description" content={ogDescription} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <!-- Fonts -->
+  <Font cssVariable="--font-rightGrotesk" preload />
+  <Font cssVariable="--font-neueMed" preload />
+  <Font cssVariable="--font-neueReg" preload />
+  <Font cssVariable="--font-neueMono" preload />
+</head>

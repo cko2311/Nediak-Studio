@@ -1,0 +1,128 @@
+<div class="cursor cursor-pointer" data-cursor>
+  <div class="cursor-text -translate-y-1.5"></div>
+</div>
+<style>
+  .cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: var(--color-copy); /* Use your new Rose accent! */
+    border: 1.5px solid var(--color-copy);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      width 0.3s,
+      height 0.3s,
+      border-radius 0.3s;
+    overflow: hidden;
+  }
+
+  /* 1. Cursor expanding - Triggered ONLY by .portfolio-card hover */
+  body:has(.portfolio-card:hover) .cursor,
+  .cursor.is-active {
+    width: 75px;
+    height: 75px;
+    background-color: oklch(from var(--color-copy) l c h / 0.85);
+    opacity: 1;
+  }
+
+  /* 2. Text becoming visible - Triggered ONLY by .portfolio-card hover */
+  body:has(.portfolio-card:hover) .cursor-text,
+  .cursor.is-active .cursor-text {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .cursor-text {
+    font-size: var(--text-fluid-xs);
+    text-transform: uppercase;
+    color: var(--color-brand);
+    opacity: 0;
+    white-space: nowrap;
+    font-weight: 600;
+
+    /* The Fix: Perfect Centering */
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+  }
+
+  /* When the cursor is "active" (hovering a case study) */
+  .cursor.is-active {
+    width: 100px;
+    height: 100px;
+  }
+
+  .cursor.is-active .cursor-text {
+    opacity: 1;
+  }
+
+  /* Only show the custom cursor on devices with a mouse */
+  @media (pointer: coarse) {
+    .cursor {
+      display: none !important;
+    }
+
+    /* Bring back the default system cursor for touch targets */
+    body {
+      cursor: auto !important;
+    }
+  }
+
+  /* Optional: Extra safety for older devices/small screens */
+  @media (max-width: 1024px) {
+    .cursor {
+      display: none !important;
+    }
+  }
+</style>
+<script>
+  import { gsap } from "@/lib/gsap";
+  const initCursor = () => {
+    const cursor = document.querySelector("[data-cursor]");
+    const cursorText = cursor.querySelector(".cursor-text");
+
+    gsap.set(cursor, { xPercent: -50, yPercent: -50 });
+
+    window.addEventListener("mousemove", (e) => {
+      gsap.to(cursor, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.5,
+        ease: "power3.out",
+      });
+    });
+
+    // Change .case-study to .portfolio-card here
+    const portfolioCards = document.querySelectorAll(".portfolio-card");
+
+    portfolioCards.forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        const text = el.getAttribute("data-cursor-text") || "View";
+        cursorText.innerText = text;
+        cursor.classList.add("is-active");
+      });
+
+      el.addEventListener("mouseleave", () => {
+        cursor.classList.remove("is-active");
+        setTimeout(() => {
+          if (!cursor.classList.contains("is-active"))
+            cursorText.innerText = "";
+        }, 300);
+      });
+    });
+  };
+
+  // Handle Astro View Transitions
+  document.addEventListener("DOMContentLoaded", initCursor);
+</script>

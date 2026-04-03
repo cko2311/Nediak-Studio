@@ -1,0 +1,590 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import H1Animate from "@/components/H1Animate.astro";
+import HeroCopyAnimate from "@/components/HeroCopyAnimate.astro";
+import CopyTextAnimate from "@/components/CopyTextAnimate.astro";
+import ScrollHtagAnimate from "@/components/ScrollHtagAnimate.astro";
+import Accordion from "@/components/Accordion.astro";
+import AccordionSlot from "@/components/AccordionSlot.astro";
+import founder from "@/assets/images/studio/nediak-studio-founder.webp";
+import { Image } from "astro:assets";
+import ImageReveal from "@/components/ImageReveal.astro";
+const pageCanonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const seoProps = {
+  title: "Studio | Nediak Studio",
+  description:
+    "Learn more about Nediak Studio, a digital website design and development studio.",
+  canonical: pageCanonicalUrl,
+};
+---
+
+<Layout seo={seoProps}>
+  <section class="w-full h-svh grid place-items-center relative">
+    <div class="space-y-10 px-fluid-md md:px-fluid-xl z-3 w-full">
+      <div>
+        <H1Animate class="text-fluid-7xl font-black max-w-[12ch] uppercase"
+          >Nediak Studio <span class="text-dark/60">Built To Last</span>
+          <span slot="sr" class="sr-only"> Nediak Studio Built To Last </span>
+        </H1Animate>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div
+          class="col-span-full md:col-start-7 md:col-end-13 lg:col-start-8 overflow-clip"
+        >
+          <HeroCopyAnimate
+            class="w-full text-balance md:w-[25ch] text-fluid-2xl p-large font-neueMed"
+          >
+            Creative web design studio and trusted partner
+            <span slot="sr" class="sr-only">
+              Creative web design studio and trusted partner
+            </span>
+          </HeroCopyAnimate>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="pb-fluid-3xl md:pb-fluid-4xl w-full">
+    <div class="px-fluid-md md:px-fluid-xl w-full">
+      <div>
+        <CopyTextAnimate indent={true} class="text-fluid-3xl p-large">
+          Nediak Studio empowers and inspires tomorrow’s brands through digital
+          experiences. We aspire to deliver the best, cutting-edge websites
+          possible. One that not only captivates your audience but also
+          powerfully converts consumers into loyal clients. We build for today,
+          but make sure you can propel your brand confidently into the future.
+          <span slot="sr" class="sr-only">
+            Nediak Studio empowers and inspires tomorrow’s brands through
+            digital experiences. We aspire to deliver the best, cutting-edge
+            websites possible. One that not only captivates your audience but
+            also powerfully converts consumers into loyal clients. We build for
+            today, but make sure you can propel your brand confidently into the
+            future.
+          </span>
+        </CopyTextAnimate>
+      </div>
+    </div>
+  </section>
+  <section class="py-fluid-3xl md:py-fluid-4xl bg-dark">
+    <div class="px-fluid-md md:px-fluid-xl space-y-16">
+      <div>
+        <ScrollHtagAnimate class="text-brand">
+          How we operate
+          <span slot="sr" class="sr-only"> How we operate </span>
+        </ScrollHtagAnimate>
+
+        <CopyTextAnimate class="text-brand w-[65ch] italic">
+          "To empower ambitious brands by engineering high-performance digital
+          experiences that blend strategic design with human-centric usability,
+          ensuring every pixel drives measurable growth."
+          <span slot="sr" class="sr-only">
+            "To empower ambitious brands by engineering high-performance digital
+            experiences that blend strategic design with human-centric
+            usability, ensuring every pixel drives measurable growth."
+          </span>
+        </CopyTextAnimate>
+      </div>
+      <div class="accordion-wrapper">
+        <AccordionSlot title="Performance First" class="text-brand">
+          In an era of instant gratification, a beautiful site that loads slowly
+          is a failed site. We are commited to technical excellence/optimizing
+          for Core Web Vitals, lean code, and accessibility. We don't just
+          designing for eyes, we are designing for speed and inclusivity. We
+          build digital experiences that are as fast as they are fluid, ensuring
+          no user is left waiting and no SEO opportunity is wasted.
+        </AccordionSlot>
+        <AccordionSlot title="Strategy-Led Aesthetics" class="text-brand">
+          Design without a goal is just art. This pillar ensures that every
+          color choice, font pairing, and layout decision is rooted in the
+          client’s business objectives. You don't just follow trends; you solve
+          problems through visual communication. Every design decision serves a
+          purpose. We align our creative vision with your bottom line to turn
+          visitors into loyal customers.
+        </AccordionSlot>
+        <AccordionSlot title="Human First Usability" class="text-brand">
+          The best interface is the one that feels invisible. By prioritizing
+          the user’s journey above all else, you create intuitive paths that
+          reduce friction. This pillar is about empathy—understanding the user's
+          pain points and guiding them effortlessly toward a solution. We design
+          for humans, not bots. Our focus on intuitive navigation ensures your
+          audience finds exactly what they need, exactly when they need it.
+        </AccordionSlot>
+        <AccordionSlot
+          title="Scalable & Future-Proof Systems"
+          class="text-brand"
+        >
+          A website should be a living asset, not a static relic. This pillar
+          focuses on building flexible design systems and clean back-ends that
+          allow your clients to grow. Whether they need to add a blog or a full
+          e-commerce suite later, the foundation you build will handle it. We
+          build for today with an eye on tomorrow. Our modular approach ensures
+          your website evolves alongside your business.
+        </AccordionSlot>
+
+        <AccordionSlot title="Transparent Collaboration" class="text-brand">
+          The cookie-cutter agency model is dead. This pillar is built on clear
+          communication, honest timelines, and educating the client throughout
+          the process. When the client feels like a partner rather than just a
+          paycheck, the final product is always superior. No BS, no surprises.
+          We maintain an open and transparent collaboration standard throughout
+          the creative process to ensure our vision always mirrors your reality.
+        </AccordionSlot>
+      </div>
+    </div>
+  </section>
+  <section class="py-fluid-3xl md:py-fluid-4xl">
+    <div
+      class="px-fluid-md md:px-fluid-xl grid grid-cols-1 md:grid-cols-3 gap-fluid-2xl"
+    >
+      <div class="w-fit">
+        <ScrollHtagAnimate>
+          The Founder
+
+          <span slot="sr" class="sr-only"> The Founder </span>
+        </ScrollHtagAnimate>
+      </div>
+      <div>
+        <ImageReveal
+          src={founder}
+          alt="nediak studio hero founder Christopher"
+          class="object-cover z-1 w-full"
+          loading="lazy"
+        />
+      </div>
+      <div class="mt-auto">
+        <CopyTextAnimate>
+          Christopher Ko is self-taught web designer and developer. He founded
+          Nediak Studio to be able to express his creative talents and bridge
+          the gap with aspiring businesses who need an online presence, but
+          don't know where to start.
+          <span slot="sr" class="sr-only">
+            Christopher Ko is self-taught web designer and developer. He started
+            his journey in 2019 starting out with simple landing pages. He
+            founded Nediak Studio to be able to express his creative talents and
+            bridge the gap with aspiring businesses who need an online presence,
+            but don't know where to start. Nediak Studio currently handles,
+            branding, design, and development projects, and well as end-to-end
+            solutions that encompass all these elements.
+          </span>
+        </CopyTextAnimate>
+      </div>
+    </div>
+  </section>
+  <section class="pb-fluid-3xl md:pb-fluid-4xl">
+    <div>
+      <div class="space-y-10 px-fluid-md md:px-fluid-xl pb-16">
+        <ScrollHtagAnimate>
+          We Don't Just Build Websites. <br />We Build Digital Authorities.
+
+          <span slot="sr" class="sr-only">
+            We Don't Just Build Websites. We Build Digital Authorities.
+          </span>
+        </ScrollHtagAnimate>
+        <CopyTextAnimate indent={true} class="text-fluid-3xl p-large">
+          We believe the web is cluttered enough. You don’t need another generic
+          template, you need a high-performance engine that drives your business
+          forward. We take a strategy-first approach that prioritizes your goals
+          over our ego. Here is how we can help.
+          <span slot="sr" class="sr-only">
+            We believe the web is cluttered enough. You don’t need another
+            generic template, you need a high-performance engine that drives
+            your business forward. We take a strategy-first approach that
+            prioritizes your goals over our ego. Here is how we can help.
+          </span>
+        </CopyTextAnimate>
+      </div>
+      <div class="card-wrapper">
+        <div
+          class="card-1 bg-brand px-fluid-md md:px-fluid-xl py-fluid-xl space-y-16"
+        >
+          <div class="space-y-3 grid grid-cols-1 md:grid-cols-12">
+            <div class="cols-span-full md:col-span-5">
+              <ScrollHtagAnimate class="text-fluid-6xl text-dark">
+                <span class="text-fluid-2xl inline-block mr-fluid-xs">01</span
+                >Websites
+                <span slot="sr" class="sr-only"> 01 Websites </span>
+              </ScrollHtagAnimate>
+            </div>
+            <div class="col-span-full md:col-span-7">
+              <CopyTextAnimate class="text-dark text-fluid-lg">
+                We don’t just build websites, we build digital experiences. By
+                blending high-character typography with purposeful motion, we
+                create a stage where your brand can truly perform. We focus on
+                fluid, high-performance code wrapped in a visual identity that
+                feels alive. It’s not just about looking good, it’s about moving
+                with intent and purpose.
+                <span slot="sr" class="sr-only">
+                  We don’t just build websites, we build digital experiences. By
+                  blending high-character typography with purposeful motion, we
+                  create a stage where your brand can truly perform. We focus on
+                  fluid, high-performance code wrapped in a visual identity that
+                  feels alive. It’s not just about looking good, it’s about
+                  moving with intent and purpose.
+                </span>
+              </CopyTextAnimate>
+            </div>
+          </div>
+          <div class="accordion-outer-wrapper">
+            <AccordionSlot title="Purposeful Motion" class="text-dark">
+              Websites shouldn't just "load", they should arrive. We treat every
+              scroll and interaction like a performance. By using smooth
+              transitions and intentional movement, we guide the eye and tell a
+              story rather than just displaying data. This is the difference
+              between a static brochure and a living digital experience.
+            </AccordionSlot>
+            <AccordionSlot title="Fluidity Over Breakpoints" class="text-dark">
+              In a world of infinite screen sizes, "mobile vs. desktop" is a
+              thing of the past. We build using fluid systems where typography
+              and spacing work as one. The site should feel like a
+              custom-tailored suit regardless of the device. We us modern CSS
+              logic so the design never feels "broken," just fluid.
+            </AccordionSlot>
+            <AccordionSlot title="The Invisible Engine" class="text-dark">
+              The best development is the kind you don't notice. We prioritize
+              lean, modern tools that ensure lightning-fast speeds. We strip
+              away the bloat and focus on high-performance frameworks, we ensure
+              that the creative "wow" factor isn't weighed down by slow load
+              times.
+            </AccordionSlot>
+          </div>
+
+          <div class="space-y-3">
+            <div class="text-dark font-mono uppercase fomt-medium">
+              <p class="text-fluid-xs underline">What We Can Do</p>
+            </div>
+            <div class="text-dark text-fluid-lg font-neueMed">
+              <p>Astro</p>
+              <p>Wordpress</p>
+              <p>Webflow</p>
+              <p>GSAP & Animation</p>
+              <p>Landing Pages</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="card-1 bg-brand-accent-green px-fluid-md md:px-fluid-xl py-fluid-xl space-y-16"
+      >
+        <div class="space-y-3 grid grid-cols-1 md:grid-cols-12">
+          <div class="cols-span-full md:col-span-5">
+            <ScrollHtagAnimate class="text-fluid-6xl text-dark">
+              <span class="text-fluid-2xl inline-block mr-fluid-xs">02</span
+              >Search
+              <span slot="sr" class="sr-only"> 02 Search </span>
+            </ScrollHtagAnimate>
+          </div>
+          <div class="col-span-full md:col-span-7">
+            <CopyTextAnimate class="text-dark text-fluid-lg">
+              Our approach to SEO is about human-first discovery. We move beyond
+              "tricking" algorithms and focus on building a clear, structural
+              map that leads your audience straight to you. By combining
+              technical integrity with a narrative that Google and your
+              customers actually understands, we ensure your brand doesn't just
+              exist—it gets found, felt, and followed.
+              <span slot="sr" class="sr-only">
+                Our approach to SEO is about human-first discovery. We move
+                beyond "tricking" algorithms and focus on building a clear,
+                structural map that leads your audience straight to you. By
+                combining technical integrity with a narrative that Google and
+                your customers actually understands, we ensure your brand
+                doesn't just exist—it gets found, felt, and followed.
+              </span>
+            </CopyTextAnimate>
+          </div>
+        </div>
+        <div class="accordion-outer-wrapper">
+          <AccordionSlot title="Human-First Discovery" class="text-dark">
+            Google doesn't buy products, people do. Our approach to SEO focuses
+            on how humans actually search and speak. We optimize for real search
+            intent and clarity. We want to ensure that when someone finds the
+            site, they find the answer they were looking for. It’s about being
+            helpful first and "rankable" second.
+          </AccordionSlot>
+          <AccordionSlot title="Structural Integrity" class="text-dark">
+            SEO starts in the code, not just the keywords. A clean, semantic
+            hierarchy is like a well-organized library. This makes it easy for
+            search engines to crawl and understand the value of your content. We
+            view technical optimization as the foundation that allows the
+            creative content to actually be seen.
+          </AccordionSlot>
+          <AccordionSlot title="Understanding The Long-Game" class="text-dark">
+            Optimization isn't a "one and done" task, it’s a constant effort and
+            evolution. We treat SEO as a living part of the business
+            process—refining, adjusting, and growing based on how the audience
+            interacts with your brand. It’s about building authority and trust
+            over time rather than chasing quick hacks"
+          </AccordionSlot>
+        </div>
+
+        <div class="space-y-3">
+          <div class="text-dark font-mono uppercase fomt-medium">
+            <p class="text-fluid-xs underline">What We Can Do</p>
+          </div>
+          <div class="text-dark text-fluid-lg font-neueMed">
+            <p>Seach Engine Optimization (SEO)</p>
+            <p>Google My Business</p>
+            <p>Keyword Strategy</p>
+            <p>Website Analystics</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="card-1 bg-brand-accent-blue px-fluid-md md:px-fluid-xl py-fluid-xl space-y-16"
+    >
+      <div class="space-y-3 grid grid-cols-1 md:grid-cols-12">
+        <div class="cols-span-full md:col-span-5">
+          <ScrollHtagAnimate class="text-fluid-6xl text-dark">
+            <span class="text-fluid-2xl inline-block mr-fluid-xs">03</span
+            >Branding
+            <span slot="sr" class="sr-only"> 03 Branding </span>
+          </ScrollHtagAnimate>
+        </div>
+        <div class="col-span-full md:col-span-7">
+          <CopyTextAnimate class="text-dark text-fluid-lg">
+            Before we ever touch a canvas, we find your purpose. We lean into
+            the abstract and the bold to build a visual language that sticks in
+            the subconscious. From the "pop" of a button to the tone of a
+            headline, we weave a consistent thread that turns a business into a
+            personality. We’re not here to follow trends, we’re here to define a
+            vibe that commands respect and justifies your premium value.
+            <span slot="sr" class="sr-only">
+              Before we ever touch a canvas, we find your purpose. We lean into
+              the abstract and the bold to build a visual language that sticks
+              in the subconscious. From the "pop" of a button to the tone of a
+              headline, we weave a consistent thread that turns a business into
+              a personality. We’re not here to follow trends, we’re here to
+              define a vibe that commands respect and justifies your premium
+              value.
+            </span>
+          </CopyTextAnimate>
+        </div>
+      </div>
+      <div class="accordion-outer-wrapper">
+        <AccordionSlot title="Abstract over Obvious" class="text-dark">
+          Great branding doesn't need to show a picture of a computer to tell
+          you it's a tech company. We lean into abstract, energetic visuals that
+          evoke a feeling. This philosophy relies on color, motion, and
+          high-character typography to build a "vibe" that sticks in the mind
+          longer than a literal icon ever could.
+        </AccordionSlot>
+        <AccordionSlot title="Deep Root Discovery" class="text-dark">
+          A beautiful logo is useless if it’s pinned to a under-developed
+          strategy. We dig deep into the "why" before we ever touch a canvas. By
+          understanding your core mission and the audience's mindset, we ensure
+          the visual identity is an authentic reflection of the business, not
+          just a trendy coat of paint.
+        </AccordionSlot>
+        <AccordionSlot title="The Infinite Thread" class="text-dark">
+          Consistency is the secret sauce of luxury. From the zesty pop of a
+          button to the way a transition feels, every touchpoint should feel
+          like it belongs to the same universe. This "thread" of cohesion builds
+          a professional, high-end presence that commands respect and justifies
+          premium value.
+        </AccordionSlot>
+      </div>
+
+      <div class="space-y-3">
+        <div class="text-dark font-mono uppercase fomt-medium">
+          <p class="text-fluid-xs underline">What We Can Do</p>
+        </div>
+        <div class="text-dark text-fluid-lg font-neueMed">
+          <p>Branding Identity</p>
+          <p>Branding Guidelines</p>
+          <p>Branding Strategy</p>
+          <p>Creative Direction</p>
+          <p>Logos & Assets</p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="card-1 bg-brand-accent-rose px-fluid-md md:px-fluid-xl py-fluid-xl space-y-16"
+    >
+      <div class="space-y-3 grid grid-cols-1 md:grid-cols-12">
+        <div class="cols-span-full md:col-span-5">
+          <ScrollHtagAnimate class="text-fluid-6xl text-dark">
+            <span class="text-fluid-2xl inline-block mr-fluid-xs">04</span>AI
+            <span slot="sr" class="sr-only"> 04 AI </span>
+          </ScrollHtagAnimate>
+        </div>
+        <div class="col-span-full md:col-span-7">
+          <CopyTextAnimate class="text-dark text-fluid-lg">
+            We don't just build websites, we build intelligent operational
+            engines. In 2026, the competitive edge belongs to businesses that
+            move from "trying AI" to "integrating AI" into the very fabric of
+            their daily work. We can help you transition from manual bottlenecks
+            to autonomous growth.
+            <span slot="sr" class="sr-only">
+              We don't just build websites, we build intelligent operational
+              engines. In 2026, the competitive edge belongs to businesses that
+              move from "trying AI" to "integrating AI" into the very fabric of
+              their daily work. We can help you transition from manual
+              bottlenecks to autonomous growth.
+            </span>
+          </CopyTextAnimate>
+        </div>
+      </div>
+      <div class="accordion-outer-wrapper">
+        <AccordionSlot title="AI-Driven Workflow Automation" class="text-dark">
+          Stop losing hours to "the work about work." We design and deploy
+          custom automation stacks that handle the heavy lifting, so your team
+          can focus on high-value creativity.
+        </AccordionSlot>
+        <AccordionSlot title="Strategic AI Integrations" class="text-dark">
+          We don't replace your tools; we make them smarter. We integrate
+          cutting-edge LLMs and agentic AI into the platforms you already use
+          (Slack, Notion, HubSpot, etc.) <br /><br />
+          <ul class="space-y-3">
+            <li>
+              <span class="font-semibold">Custom Knowledge Bases:</span> We turn your
+              internal documents, SOPs, and past projects into a private, searchable
+              AI brain for your team.
+            </li>
+            <li>
+              <span class="font-semibold"> Predictive Business Insights: </span>
+              Move from historical reporting to predictive intelligence. Stress-test
+              your budget and forecast demand using your own data.
+            </li>
+          </ul>
+        </AccordionSlot>
+        <AccordionSlot
+          title="Generative Engine Optimization (GEO)"
+          class="text-dark"
+        >
+          Traditional SEO is no longer enough. If ChatGPT, Perplexity, or
+          Google’s AI Overviews aren’t citing your brand, you effectively don’t
+          exist in the modern buyer’s journey. <br />
+          <br />
+          <ul class="space-y-3">
+            <li>
+              <span class="font-semibold">AI Visibility Audits:</span> We analyze
+              how leading AI models perceive and recommend your brand.
+            </li>
+            <li>
+              <span class="font-semibold"> Entity & Citation Strategy: </span>
+              We optimize your digital footprint—from structured data to community
+              presence—to ensure you are the "top-recommended" authority in AI-generated
+              answers.
+            </li>
+          </ul>
+        </AccordionSlot>
+      </div>
+
+      <div class="space-y-3">
+        <div class="text-dark font-mono uppercase fomt-medium">
+          <p class="text-fluid-xs underline">What We Can Do</p>
+        </div>
+        <div class="text-dark text-fluid-lg font-neueMed">
+          <p>AI Consulting</p>
+          <p>AI Integrations</p>
+          <p>Workflow Automations</p>
+          <p>Generative Engine Optimization (GEO)</p>
+          <p>Answer Engine Optimization (AEO)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="bg-dark mb-fluid-3xl md:mb-fluid-4xl py-16 md:py-32">
+    <div class="mx-auto w-[90%] space-y-10">
+      <div>
+        <CopyTextAnimate class="text-light text-center text-3xl text-balance">
+          "Chris consistently demonstrates exceptional attention to detail in
+          his website designs and is committed to continuously enhancing his web
+          development skills. Having collaborated with him on several projects,
+          I can attest to his reliability in delivering high-quality work. He
+          excels at crafting timeless websites that offer a clean and engaging
+          user experience—a rare quality among developers."
+          <span slot="sr" class="sr-only"
+            >"Chris consistently demonstrates exceptional attention to detail in
+            his website designs and is committed to continuously enhancing his
+            web development skills. Having collaborated with him on several
+            projects, I can attest to his reliability in delivering high-quality
+            work. He excels at crafting timeless websites that offer a clean and
+            engaging user experience—a rare quality among developers."</span
+          >
+        </CopyTextAnimate>
+      </div>
+      <div class="mx-auto flex w-fit items-center gap-8">
+        <div class="flex flex-col">
+          <CopyTextAnimate class="text-light text-base">
+            Kamron Nelson
+            <span slot="sr" class="sr-only">Kamron Nelson</span>
+          </CopyTextAnimate>
+
+          <CopyTextAnimate class="text-neutral text-base">
+            Owner at Fishhook Marketing
+            <span slot="sr" class="sr-only">Owner at Fishhook Marketing</span>
+          </CopyTextAnimate>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="pb-fluid-3xl md:pb-fluid-4xl">
+    <div class="px-fluid-md md:px-fluid-xl">
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div class="col-span-full md:col-span-5">
+          <ScrollHtagAnimate>
+            FAQ
+
+            <span slot="sr" class="sr-only"> FAQ </span>
+          </ScrollHtagAnimate>
+          <CopyTextAnimate class="w-[35ch]">
+            These are the most frequently asked questions we receive from
+            interested companies.
+            <span slot="sr" class="sr-only">
+              These are the most frequently asked questions we receive from
+              interested companies.
+            </span>
+          </CopyTextAnimate>
+        </div>
+        <div class="col-span-full md:col-span-7">
+          <AccordionSlot
+            title="How long is a typical project?"
+            class="text-dark faq"
+          >
+            Most projects generally take about 30-45 days, but that could vary
+            depending on the scope and size of your project.
+          </AccordionSlot>
+          <AccordionSlot
+            title="How much does a website cost?"
+            class="text-dark faq"
+          >
+            Websites can vary in price depending on the scope and complexity of
+            your project. Most of the projects we do start around the $5000
+            range.
+          </AccordionSlot>
+          <AccordionSlot
+            title="Do you offer website refreshes?"
+            class="text-dark faq"
+          >
+            Yes, we can refresh existing websites! There may be some additional
+            factors to take into consideration such as...What platform is the
+            website currently on? What is the current standing of your SEO and
+            organic ranking on Google?
+          </AccordionSlot>
+          <AccordionSlot title="How do we get started?" class="text-dark faq">
+            An introduction conversation, discovery call, signed off agreement
+            on the scope of work, and the required 25% deposit.
+          </AccordionSlot>
+          <AccordionSlot
+            title="Do I own the website when it's launched?"
+            class="text-dark faq"
+          >
+            Upon final payment, you own the website. Typically we recommend you
+            get your own hosting and we would transfer the site upon final
+            payment. Alternatively, we do provide hosting for a monthly fee.
+            Contact us to learn more.
+          </AccordionSlot>
+          <AccordionSlot
+            title="Do you offer E-commerce solutions?"
+            class="text-dark faq"
+          >
+            Yes! We typically use wordpress with WooCommerce or FluentCart for
+            our E-Commerce solutions. If you are looking at Shopify, it is
+            certainly a conversation we can have about your needs and goals.
+          </AccordionSlot>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

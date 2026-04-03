@@ -1,0 +1,109 @@
+---
+interface Props {
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
+  class?: string;
+}
+
+const { level = 1, class: className } = Astro.props;
+const Tag = `h${level}`;
+---
+
+<Tag class={`hero-heading relative ${className || ""}`}>
+  <!-- Animated visual text (decorative only) -->
+  <span
+    class="hero-split-heading"
+    style="opacity:0;visibility:hidden"
+    aria-hidden="true"
+  >
+    <slot />
+  </span>
+
+  <!-- Accessible static text for screen readers -->
+  <slot name="sr" />
+</Tag>
+
+<style>
+  .hero-heading {
+    position: relative;
+    display: block;
+    overflow: hidden;
+  }
+
+  .hero-split-heading span {
+    display: inline-block;
+    font-kerning: none;
+    text-rendering: optimizeSpeed;
+    opacity: 0;
+    visibility: hidden;
+    will-change: transform;
+  }
+
+  /* Screen-reader only version */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+
+<script>
+  import { gsap, SplitText, DURATION, EASE } from "@/lib/gsap";
+
+  let ctx;
+
+  const runHeroAnimation = () => {
+    // 1. Cleanup previous instance to prevent memory leaks/double-splitting
+    if (ctx) ctx.revert();
+
+    // 2. Use gsap.context to scope everything to the current page
+    ctx = gsap.context(() => {
+      const elements = gsap.utils.toArray(".hero-split-heading");
+
+      elements.forEach((element) => {
+        // Ensure element is visible before splitting
+        gsap.set(element, { opacity: 1, visibility: "visible" });
+
+        const split = new SplitText(element, {
+          types: "lines",
+          mask: "lines",
+          linesClass: "lineParent", // Helper for masking
+          autoSplit: true,
+        });
+
+        // Optional: Wrap lines for a "reveal from nothing" effect
+        new SplitText(element, {
+          types: "lines",
+          mask: "lines",
+          linesClass: "lineChild",
+        });
+
+        gsap.set(".lineChild", {
+          yPercent: 200,
+          autoAlpha: 0,
+        });
+
+        gsap.to(".lineChild", {
+          yPercent: 0,
+          autoAlpha: 1,
+          duration: DURATION,
+          ease: "expo.out",
+          stagger: 0.075,
+          delay: 1.2,
+        });
+      });
+    });
+  };
+
+  // The secret sauce: Listen for astro:page-load
+  // This fires on initial load AND every navigation (Back/Forward/Link)
+  document.addEventListener("DOMContentLoaded", () => {
+    // Wait for fonts to ensure SplitText calculates line breaks correctly
+    document.fonts.ready.then(runHeroAnimation);
+  });
+</script>

@@ -1,0 +1,227 @@
+---
+import Logo from "@/components/Logo.astro";
+const menuLinks = [
+  { path: "/portfolio", label: "Portfolio" },
+  { path: "/studio", label: "Studio" },
+  { path: "/process", label: "Process" },
+  { path: "/contact", label: "Contact" },
+];
+
+const socialLinks = [
+  { path: "https://x.com/vuelvedesign", label: "X (Twitter)" },
+  { path: "https://www.instagram.com/vuelvedesign/", label: "Instagram" },
+  { path: "https://www.linkedin.com/", label: "LinkedIn" },
+];
+---
+
+<header
+  class="fixed top-0 left-0 w-full py-fluid-sm px-fluid-md flex justify-between items-center mix-blend-difference text-light z-9999"
+>
+  <div class="z-100">
+    <a
+      href="/"
+      id="menu-logo"
+      class="logo font-neueMed text-xl tracking-tighter"
+    >
+      <Logo class="text-light w-36 h-auto" />
+    </a>
+  </div>
+
+  <nav class="hidden md:block">
+    <ul class="flex flex-row space-x-8 font-neueMed">
+      {
+        menuLinks.map((link) => (
+          <li>
+            <a
+              href={link.path}
+              class="dsk-menu-link hover:opacity-70 transition-opacity"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <button
+    id="menu-toggle"
+    class="md:hidden relative h-8 w-24 overflow-hidden flex items-center justify-end focus:outline-none"
+    aria-expanded="false"
+  >
+    <span id="menu-open" class="absolute right-0 font-semibold">Menu</span>
+    <span
+      id="menu-close"
+      class="absolute right-0 font-semibold opacity-0 translate-y-full"
+    >
+      Close
+    </span>
+  </button>
+</header>
+
+<div
+  id="menu-overlay"
+  class="invisible fixed inset-0 z-90 bg-dark flex flex-col justify-between p-fluid-md pointer-events-none md:hidden"
+>
+  <div class="mt-18 flex flex-col space-y-4">
+    {
+      menuLinks.map((link) => (
+        <a
+          href={link.path}
+          class="menu-link text-light font-neueMed text-6xl w-fit hover:text-gray-400 transition-colors"
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </div>
+
+  <div class="flex flex-col font-mono mt-8 flex-1 justify-around">
+    <div>
+      <p class="text-sm uppercase text-neutral">Nediak Studio</p>
+      <p class="text-sm uppercase text-neutral">New Jersey, USA</p>
+      <p class="text-sm uppercase text-neutral">40.0583° N, 74.4057° W</p>
+    </div>
+
+    <div class="flex flex-col text-sm uppercase text-neutral">
+      {
+        socialLinks.map((social) => (
+          <a href={social.path} target="_blank" class="hover:text-gray-400">
+            {social.label}
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="flex flex-col text-sm uppercase">
+      <a
+        href="mailto:hello@nediakstudio.com"
+        class="text-sm font-mono text-neutral uppercase"
+      >
+        hello@nediakstudio.com
+      </a>
+      <a
+        href="tel:305-484-1906"
+        class="text-sm font-mono text-neutral uppercase"
+      >
+        305-484-1906
+      </a>
+    </div>
+
+    <div>
+      <p class="text-sm text-light font-sans">SVG WILL GO HERE</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  header a {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { navigate } from "astro:transitions/client";
+
+  function initMenu() {
+    const toggle = document.querySelector("#menu-toggle");
+    const logo = document.querySelector("#menu-logo");
+    const overlay = document.querySelector("#menu-overlay");
+    const openLabel = document.querySelector("#menu-open");
+    const closeLabel = document.querySelector("#menu-close");
+    const links = document.querySelectorAll(".menu-link");
+
+    // Early exit if mobile elements don't exist (Desktop view)
+    if (!toggle || !overlay) return;
+
+    let isOpen = false;
+    let isAnimating = false;
+    let pendingUrl = null;
+
+    // Initial Clip State
+    gsap.set(overlay, {
+      clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+      visibility: "visible",
+    });
+
+    const menuTl = gsap.timeline({
+      paused: true,
+      defaults: { duration: 0.8, ease: "power4.inOut" },
+      onStart: () => {
+        isAnimating = true;
+        overlay.classList.remove("invisible");
+      },
+      onComplete: () => {
+        isAnimating = false;
+      },
+      onReverseComplete: () => {
+        isAnimating = false;
+        overlay.classList.add("invisible");
+
+        if (pendingUrl) {
+          navigate(pendingUrl);
+          pendingUrl = null;
+        }
+      },
+    });
+
+    menuTl
+      .to(
+        overlay,
+        {
+          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+          pointerEvents: "all",
+        },
+        0,
+      )
+      .to(openLabel, { y: "-100%", opacity: 0 }, 0)
+      .to(closeLabel, { y: "0%", opacity: 1 }, 0);
+
+    function handleToggle(url = null) {
+      if (isAnimating) return;
+
+      if (!isOpen) {
+        pendingUrl = null;
+        menuTl.timeScale(1).play();
+        toggle.setAttribute("aria-expanded", "true");
+        isOpen = true;
+      } else {
+        pendingUrl = url;
+        menuTl.timeScale(1).reverse();
+        toggle.setAttribute("aria-expanded", "false");
+        isOpen = false;
+      }
+    }
+
+    toggle.addEventListener("click", () => handleToggle());
+
+    logo?.addEventListener("click", (e) => {
+      if (isOpen) {
+        e.preventDefault();
+        const href = logo.getAttribute("href");
+        handleToggle(href);
+      }
+    });
+
+    links.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const href = link.getAttribute("href");
+        if (href && href.startsWith("/")) {
+          e.preventDefault();
+          handleToggle(href);
+        }
+      });
+    });
+
+    // Close menu if window is resized to desktop width
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 768 && isOpen) {
+        handleToggle();
+      }
+    });
+  }
+
+  document.addEventListener("astro:page-load", initMenu);
+</script>

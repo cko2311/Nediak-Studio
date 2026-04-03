@@ -1,0 +1,67 @@
+---
+import { Image } from "astro:assets";
+import ImageReveal from "@/components/ImageReveal.astro";
+import { type ImageMetadata } from "astro";
+import ScrollHtagAnimate from "@/components/ScrollHtagAnimate.astro";
+import CopyTextAnimate from "@/components/CopyTextAnimate.astro";
+
+export interface Props {
+  client: string;
+  industry: string;
+  url: string;
+  src: ImageMetadata;
+  alt: string;
+  width: number;
+  height: number;
+  class?: string;
+}
+
+const {
+  client,
+  industry,
+  url,
+  src,
+  alt,
+  width,
+  height,
+  class: containerClass = "h-auto w-full",
+} = Astro.props;
+---
+
+<a
+  href={url}
+  data-cursor-text="
+  View
+  Case"
+  class="portfolio-card group block case-study"
+>
+  <div
+    class={`image-reveal-container overflow-hidden hover:scale-[102%] hover:transition hover:duration-300 hover:ease-in-out ${containerClass}`}
+  >
+    <ImageReveal
+      src={src}
+      width={width}
+      height={height}
+      alt={alt}
+      fit="cover"
+      class="image-to-animate h-full w-full"
+    />
+  </div>
+
+  <div class="mt-6 flex flex-col space-y-1">
+    <div>
+      <ScrollHtagAnimate class="text-fluid-3xl font-bold uppercase">
+        {client}
+        <span slot="sr" class="sr-only">{client}</span>
+      </ScrollHtagAnimate>
+    </div>
+    <div class="w-fit">
+      <CopyTextAnimate
+        class="w-fit font-mono text-fluid-xs uppercase font-medium"
+      >
+        {industry}
+        <span slot="sr" class="sr-only">{industry}</span>
+      </CopyTextAnimate>
+    </div>
+  </div>
+</a>

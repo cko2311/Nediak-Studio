@@ -1,0 +1,57 @@
+---
+interface Props {
+  text: string; // The button text
+  url: string; // The link destination
+  target?: string; // Optional: open in new tab
+  isActive?: boolean; // New: Boolean to indicate if this link is for the current page
+}
+
+const { text, url, target = "_self", isActive = false } = Astro.props;
+---
+
+<a
+  href={url}
+  target={target}
+  class="group btn-animate bg-brand text-dark flex w-fit items-center gap-3 rounded-full px-6 py-4 text-sm uppercase outline-none transition-all focus:ring-2 focus:ring-dark font-neueMed"
+>
+  <span class="relative h-4 overflow-hidden font-neueMed flex items-center">
+    <span class="relative block">
+      <span
+        class="h-4 flex items-center transition-transform duration-300 group-hover:-translate-y-4"
+      >
+        {text}
+      </span>
+      <span
+        class="absolute top-0 left-0 h-4 flex items-center translate-y-4 transition-transform duration-300 group-hover:translate-y-0"
+      >
+        {text}
+      </span>
+    </span>
+  </span>
+
+  <div
+    class="border-dark size-2 shrink-0 rounded-full border transition-all duration-300 group-hover:bg-dark group-hover:scale-110"
+    aria-hidden="true"
+  >
+  </div>
+</a>
+
+<script>
+  import { gsap, EASE, DURATION, ScrollTrigger } from "@/lib/gsap";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll(".btn-animate");
+
+    buttons.forEach((btn) => {
+      gsap.from(btn, {
+        scrollTrigger: {
+          trigger: btn,
+          start: "top 90%", // when button enters viewport
+        },
+        autoAlpha: 0,
+        duration: 0.35,
+        ease: "expo.inOut",
+      });
+    });
+  });
+</script>

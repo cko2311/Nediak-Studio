@@ -1,0 +1,84 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import H1Animate from "@/components/H1Animate.astro";
+import HeroCopyAnimate from "@/components/HeroCopyAnimate.astro";
+const pageCanonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const seoProps = {
+  title: "Contact | Nediak Studio",
+  description:
+    "Contact Nediak Studio if you are looking for a website, branding, or search engine optimization for your business.",
+  canonical: pageCanonicalUrl,
+};
+---
+
+<Layout seo={seoProps}>
+  <section class="w-full h-svh grid place-items-center relative">
+    <div class="space-y-10 px-fluid-md md:px-fluid-xl z-3 w-full">
+      <div>
+        <H1Animate class="text-fluid-7xl max-w-[15ch] uppercase"
+          >Have a Project? <span class="text-dark/60">Lets Connect</span>
+          <span slot="sr" class="sr-only"> Have a Project? Let's Connect </span>
+        </H1Animate>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div
+          class="col-span-full md:col-start-7 md:col-end-13 lg:col-start-8 overflow-clip"
+        >
+          <HeroCopyAnimate
+            class="w-full md:w-[25ch] text-fluid-2xl font-neueMed p-large"
+          >
+            Start the conversation on your new project or collaboration.
+          </HeroCopyAnimate>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="pb-fluid-3xl md:pb-fluid-4xl">
+    <div class="px-fluid-md md:px-fluid-xl w-full">
+      <div>
+        <div class="border-t border-t-neutral py-fluid-sm font-neueMed">
+          <a
+            href="mailto:hello@nediakstudio.com"
+            class="contact-link text-fluid-4xl hover:text-brand after:bg-brand relative inline-block w-fit transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-[calc(100%-1px)] after:origin-right after:scale-x-0 after:transition-transform after:duration-400 after:ease-in after:content-[''] hover:after:origin-left hover:after:scale-x-100"
+            >info@nediakstudio.com</a
+          >
+        </div>
+        <div class="border-t border-t-neutral py-fluid-sm font-neueMed">
+          <a
+            href="tel:+1-305-484-1906"
+            class="contact-link text-fluid-4xl hover:text-brand after:bg-brand relative inline-block w-fit transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-[calc(100%-1px)] after:origin-right after:scale-x-0 after:transition-transform after:duration-400 after:ease-in after:content-[''] hover:after:origin-left hover:after:scale-x-100"
+            >305-484-1906</a
+          >
+        </div>
+        <div class="border-t border-t-neutral py-fluid-sm font-neueMed">
+          <a
+            href=""
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-link text-fluid-4xl hover:text-brand after:bg-brand relative inline-block w-fit transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-[calc(100%-1px)] after:origin-right after:scale-x-0 after:transition-transform after:duration-400 after:ease-in after:content-[''] hover:after:origin-left hover:after:scale-x-100"
+            >X(Twitter)</a
+          >
+        </div>
+        <div class="border-t border-t-neutral py-fluid-sm font-neueMed">
+          <a
+            href=""
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-link text-fluid-4xl hover:text-brand after:bg-brand relative inline-block w-fit transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-[calc(100%-1px)] after:origin-right after:scale-x-0 after:transition-transform after:duration-400 after:ease-in after:content-[''] hover:after:origin-left hover:after:scale-x-100"
+            >Instagram</a
+          >
+        </div>
+        <div class="border-y border-y-neutral py-fluid-sm font-neueMed">
+          <a
+            href=""
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-link text-fluid-4xl hover:text-brand after:bg-brand relative inline-block w-fit transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-[calc(100%-1px)] after:origin-right after:scale-x-0 after:transition-transform after:duration-400 after:ease-in after:content-[''] hover:after:origin-left hover:after:scale-x-100"
+            >LinkedIn</a
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

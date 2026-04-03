@@ -1,0 +1,95 @@
+---
+// Marquee.astro
+interface Props {
+  title: string;
+  color?: string;
+  bgColor?: string; // 1. Add the new prop
+}
+
+// 2. Destructure it and give it a default value (like your original bg-dark hex code)
+const { title, color = "currentColor", bgColor = "#1a1a1a" } = Astro.props;
+---
+
+<div class="marquee-container relative w-full overflow-hidden">
+  <h2 id="marquee-label" class="sr-only">Client Project Marquee</h2>
+
+  <div
+    role="marquee"
+    aria-labelledby="marquee-label"
+    aria-label={`A scrolling marquee of ${title}`}
+    tabindex="0"
+    class="marquee-wrapper group relative flex h-32 md:h-44 items-center backdrop-blur-md"
+    style={`background-color: ${bgColor};`}
+  >
+    <div
+      class="marquee-content absolute left-0 flex items-center justify-center whitespace-nowrap uppercase will-change-transform"
+    >
+      {
+        Array.from({ length: 4 }).map(() => (
+          <>
+            <span
+              class="text-fluid-7xl font-display flex items-center px-8 py-4 md:px-12"
+              style={`color: ${color};`}
+            >
+              <span class="sr-only">{title}</span>
+              <span aria-hidden="true">{title}</span>
+            </span>
+            <span
+              aria-hidden="true"
+              class="mx-4 inline-block size-4"
+              style={`background-color: ${color};`}
+            />
+          </>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+</style>
+
+<script>
+  import { gsap } from "@/lib/gsap";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const marqueeContent = document.querySelector(".marquee-content");
+    const marqueeWrapper = document.querySelector(".marquee-wrapper");
+
+    if (!marqueeContent || !marqueeWrapper) return;
+
+    // Duplicate the content to create a seamless loop
+    const content = marqueeContent.innerHTML;
+    marqueeContent.innerHTML = content + content;
+
+    const fullWidth = marqueeContent.scrollWidth / 2;
+
+    const marqueeAnimation = gsap.to(marqueeContent, {
+      x: -fullWidth,
+      duration: 20,
+      ease: "none",
+      repeat: -1,
+    });
+
+    // Pause animation on mouse hover or keyboard focus
+    marqueeWrapper.addEventListener("mouseenter", () =>
+      marqueeAnimation.pause(),
+    );
+    marqueeWrapper.addEventListener("mouseleave", () =>
+      marqueeAnimation.play(),
+    );
+    marqueeWrapper.addEventListener("focusin", () => marqueeAnimation.pause());
+    marqueeWrapper.addEventListener("focusout", () => marqueeAnimation.play());
+  });
+</script>
