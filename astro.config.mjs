@@ -74,6 +74,7 @@ export default defineConfig({
 
   output: "static",
   adapter: cloudflare({
-    imageService: "cloudflare" // Uses the global Cloudflare resizing service
+    // 'cloudflare-binding' is the updated way to handle resizing in Astro 6
+    imageService: "cloudflare-binding"
   })
 });
