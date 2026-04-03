@@ -3,11 +3,7 @@
   "compatibility_date": "2026-04-03",
   "compatibility_flags": ["global_fetch_strictly_public", "nodejs_compat"],
   "pages_build_output_dir": "./dist",
-  "assets": {
-    "directory": "./dist",
-    "binding": "STUDIO_ASSETS"
-  },
   "observability": {
     "enabled": true
-  } // No comma here!
-} // No comma here!
+  }
+}

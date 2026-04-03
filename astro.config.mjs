@@ -77,12 +77,6 @@ export default defineConfig({
 
   adapter: cloudflare({
     // This tells Astro to use Cloudflare's native CDN resizing
-    imageService: "cloudflare",
-
-    // Remember to match the name you just set in wrangler.jsonc!
-    runtime: {
-      mode: "advanced",
-      binding: "STUDIO_ASSETS"
-    }
+    imageService: "cloudflare"
   })
 });
