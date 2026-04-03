@@ -74,7 +74,7 @@ export default defineConfig({
 
   output: "static",
   adapter: cloudflare({
-    // Switch to 'cloudflare' to use the global CDN resizing
-    imageService: "cloudflare"
+    // 'compile' handles images at build-time, which is free/unlimited
+    imageService: "compile"
   })
 });
