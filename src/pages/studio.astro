@@ -14,7 +14,7 @@ const seoProps = {
   title: "Studio | Nediak Studio",
   description:
     "Learn more about Nediak Studio, a digital website design and development studio.",
-  canonical: pageCanonicalUrl,
+  canonical: pageCanonicalUrl
 };
 ---
 
@@ -73,7 +73,7 @@ const seoProps = {
           <span slot="sr" class="sr-only"> How we operate </span>
         </ScrollHtagAnimate>
 
-        <CopyTextAnimate class="text-brand w-[65ch] italic">
+        <CopyTextAnimate class="text-brand w-full md:w-[65ch] italic">
           "To empower ambitious brands by engineering high-performance digital
           experiences that blend strategic design with human-centric usability,
           ensuring every pixel drives measurable growth."
@@ -134,7 +134,7 @@ const seoProps = {
   </section>
   <section class="py-fluid-3xl md:py-fluid-4xl">
     <div
-      class="px-fluid-md md:px-fluid-xl grid grid-cols-1 md:grid-cols-3 gap-fluid-2xl"
+      class="px-fluid-md md:px-fluid-xl grid grid-cols-1 md:grid-cols-3 gap-fluid-lg md:gap-fluid-2xl"
     >
       <div class="w-fit">
         <ScrollHtagAnimate>
@@ -487,7 +487,9 @@ const seoProps = {
   <section class="bg-dark mb-fluid-3xl md:mb-fluid-4xl py-16 md:py-32">
     <div class="mx-auto w-[90%] space-y-10">
       <div>
-        <CopyTextAnimate class="text-light text-center text-3xl text-balance">
+        <CopyTextAnimate
+          class="text-light text-center text-fluid-xl text-pretty md:text-balance"
+        >
           "Chris consistently demonstrates exceptional attention to detail in
           his website designs and is committed to continuously enhancing his web
           development skills. Having collaborated with him on several projects,

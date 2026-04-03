@@ -4,13 +4,13 @@ const menuLinks = [
   { path: "/portfolio", label: "Portfolio" },
   { path: "/studio", label: "Studio" },
   { path: "/process", label: "Process" },
-  { path: "/contact", label: "Contact" },
+  { path: "/contact", label: "Contact" }
 ];
 
 const socialLinks = [
   { path: "https://x.com/vuelvedesign", label: "X (Twitter)" },
   { path: "https://www.instagram.com/vuelvedesign/", label: "Instagram" },
-  { path: "https://www.linkedin.com/", label: "LinkedIn" },
+  { path: "https://www.linkedin.com/", label: "LinkedIn" }
 ];
 ---
 
@@ -23,7 +23,7 @@ const socialLinks = [
       id="menu-logo"
       class="logo font-neueMed text-xl tracking-tighter"
     >
-      <Logo class="text-light w-36 h-auto" />
+      <Logo class="text-light w-36" />
     </a>
   </div>
 
@@ -109,7 +109,7 @@ const socialLinks = [
     </div>
 
     <div>
-      <p class="text-sm text-light font-sans">SVG WILL GO HERE</p>
+      <Logo class="text-light" />
     </div>
   </div>
 </div>
@@ -143,7 +143,7 @@ const socialLinks = [
     // Initial Clip State
     gsap.set(overlay, {
       clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
-      visibility: "visible",
+      visibility: "visible"
     });
 
     const menuTl = gsap.timeline({
@@ -164,7 +164,7 @@ const socialLinks = [
           navigate(pendingUrl);
           pendingUrl = null;
         }
-      },
+      }
     });
 
     menuTl
@@ -172,9 +172,9 @@ const socialLinks = [
         overlay,
         {
           clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-          pointerEvents: "all",
+          pointerEvents: "all"
         },
-        0,
+        0
       )
       .to(openLabel, { y: "-100%", opacity: 0 }, 0)
       .to(closeLabel, { y: "0%", opacity: 1 }, 0);

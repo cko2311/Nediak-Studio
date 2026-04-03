@@ -13,7 +13,7 @@ export function getStaticPaths() {
   // 2. Iterating over 'caseStudies' and passing each item as 'caseStudy' prop
   return caseStudies.map((caseStudy) => ({
     params: { caseStudySlug: caseStudy.slug },
-    props: { caseStudy },
+    props: { caseStudy }
   }));
 }
 
@@ -22,7 +22,7 @@ const pageCanonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
 const seoProps = {
   title: `Case Study | ${caseStudy.name}`, // Dynamic title
   description: caseStudy.seoDescription, // Dynamic description
-  canonical: pageCanonicalUrl, // Calculated canonical URL
+  canonical: pageCanonicalUrl // Calculated canonical URL
   // Add other optional props like noIndex, ogImage here if needed
 };
 ---
@@ -102,7 +102,7 @@ const seoProps = {
     </div>
     <section class="py-fluid-3xl md:py-fluid-4xl">
       <div class="px-fluid-md md:px-fluid-xl z-3 w-full">
-        <div class="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div class="mt-6 grid grid-cols-1 gap-fluid-2xl md:grid-cols-2">
           <div class="flex flex-col">
             <div>
               <ScrollHtagAnimate class="font-neue uppercase">
