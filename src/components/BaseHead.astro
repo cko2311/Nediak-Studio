@@ -20,7 +20,7 @@ const defaultOG = {
   url: "https://www.nediakstudio.com",
   image: "",
   type: "website",
-  twitterHandle: "",
+  twitterHandle: ""
 };
 
 // Merge dynamic page data with defaults
@@ -41,6 +41,13 @@ const twitterHandle = defaultOG.twitterHandle;
   <link rel="icon" type="image/png" sizes="16x16" href="/" />
   <link rel="icon" type="image/svg+xml" href="/" />
   <meta name="generator" content={Astro.generator} />
+  <style is:inline>
+    @media screen and (prefers-reduced-motion: no-preference) {
+      @view-transition {
+        navigation: auto;
+      }
+    }
+  </style>
 
   <!-- Standard SEO -->
   <SEO
