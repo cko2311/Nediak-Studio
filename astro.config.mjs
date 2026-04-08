@@ -75,6 +75,13 @@ export default defineConfig({
   output: "static",
   adapter: cloudflare({
     // 'compile' handles images at build-time, which is free/unlimited
-    imageService: "compile"
-  })
+    imageService: "cloudflare"
+  }),
+  image: {
+    // This ensures local dev uses the standard service
+    // while allowing Cloudflare to handle it in production
+    service: {
+      entrypoint: "astro/assets/services/sharp"
+    }
+  }
 });

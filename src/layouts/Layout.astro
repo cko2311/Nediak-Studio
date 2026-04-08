@@ -30,12 +30,12 @@ const { seo, noIndex = false } = Astro.props;
     <script>
       import { initSmoothScroll } from "../scripts/lenis-init.js";
 
-      document.addEventListener("astro:page-load", () => {
+      document.addEventListener("DOMContentLoaded", () => {
         initSmoothScroll();
       });
     </script>
-    <script is:inline>
-      document.addEventListener("astro:page-load", () => {
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
         window.scrollTo({ top: 0, behavior: "instant" });
       });
     </script>
