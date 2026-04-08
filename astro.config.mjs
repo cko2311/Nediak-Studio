@@ -3,6 +3,7 @@ import { defineConfig, fontProviders } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 
 import cloudflare from "@astrojs/cloudflare";
+const isDev = process.env.NODE_ENV === "development";
 
 // https://astro.build/config
 export default defineConfig({
@@ -74,14 +75,14 @@ export default defineConfig({
 
   output: "static",
   adapter: cloudflare({
-    // 'compile' handles images at build-time, which is free/unlimited
-    imageService: "cloudflare"
+    // In production, we use 'compile' for the free tier.
+    // In dev, we use 'passthrough' to avoid the 'fetch' error.
+    imageService: isDev ? "passthrough" : "compile"
   }),
+
+  // This block ensures Astro doesn't try to look for Cloudflare
+  // bindings when you're running locally.
   image: {
-    // This ensures local dev uses the standard service
-    // while allowing Cloudflare to handle it in production
-    service: {
-      entrypoint: "astro/assets/services/sharp"
-    }
+    service: isDev ? { entrypoint: "astro/assets/services/sharp" } : undefined
   }
 });
