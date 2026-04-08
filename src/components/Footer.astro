@@ -126,15 +126,13 @@ import Logo from "@/components/Logo.astro";
       <div class="border-b border-light pb-fluid-sm">
         <Logo class="text-light" />
       </div>
-      <div
-        class="flex flex-col md:flex-row justify-between items-start md:items-center pt-fluid-sm"
-      >
+      <div class="grid grid-cols-1 md:grid-cols-3 pt-fluid-sm gap-fluid-2xs">
         <div>
           <p class="text-light text-fluid-sm">
             Nediak Studio 2026, All rights reserved
           </p>
         </div>
-        <div>
+        <div class="mx-0 md:mx-auto">
           <a
             href="/privacy-policy"
             class="privacy text-light text-fluid-sm font-semibold hover:text-brand after:bg-brand relative inline-block w-fit transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-[calc(100%-1px)] after:origin-right after:scale-x-0 after:transition-transform after:duration-400 after:ease-in after:content-[''] hover:after:origin-left hover:after:scale-x-100"
@@ -142,7 +140,7 @@ import Logo from "@/components/Logo.astro";
             Privacy Policy
           </a>
         </div>
-        <div>
+        <div class="mx-0 md:ml-auto">
           <p class="text-light text-fluid-sm">NJ, USA</p>
         </div>
       </div>
