@@ -8,7 +8,7 @@ const isDev = process.env.NODE_ENV === "development";
 // https://astro.build/config
 export default defineConfig({
   site: "https://nediakstudio.com",
-  sitemap(),
+  integrations: [sitemap()],
 
   vite: {
     plugins: [tailwindcss()]
@@ -90,7 +90,5 @@ export default defineConfig({
   // bindings when you're running locally.
   image: {
     service: isDev ? { entrypoint: "astro/assets/services/sharp" } : undefined
-  },
-
-  integrations: [sitemap()]
+  }
 });
