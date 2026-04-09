@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nediakstudio.com/sitemap-index.xml
