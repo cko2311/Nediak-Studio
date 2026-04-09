@@ -81,13 +81,12 @@ export default defineConfig({
   output: "static",
 
   adapter: cloudflare({
-    // In production, we use 'compile' for the free tier.
-    // In dev, we use 'passthrough' to avoid the 'fetch' error.
+    // Use 'compile' for production, 'passthrough' for local dev to avoid fetch errors
     imageService: isDev ? "passthrough" : "compile"
   }),
 
-  // This block ensures Astro doesn't try to look for Cloudflare
-  // bindings when you're running locally.
+  // This ensures Astro uses the local 'sharp' service during your local build/dev
+  // but leaves it undefined for Cloudflare to handle in production
   image: {
     service: isDev ? { entrypoint: "astro/assets/services/sharp" } : undefined
   }
