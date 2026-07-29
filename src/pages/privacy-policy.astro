@@ -6,7 +6,7 @@ const pageCanonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
 const seoProps = {
   title: "Privacy | Nediak Studio",
   description: "Nediak Studio privacy policy",
-  canonical: pageCanonicalUrl,
+  canonical: pageCanonicalUrl
 };
 ---
 
@@ -47,14 +47,14 @@ const seoProps = {
         </p>
       </div>
       <div class="block-consent space-y-4">
-        <h2>Consent</h2>
+        <h2 class="privacy-pol">Consent</h2>
         <p>
           By using our website, you hereby consent to our Privacy Policy and
           agree to its terms.
         </p>
       </div>
       <div class="Info-Collect space-y-4">
-        <h2>Information we collect</h2>
+        <h2 class="privacy-pol">Information we collect</h2>
         <div class="space-y-4">
           <p>
             The personal information that you are asked to provide, and the
@@ -75,7 +75,7 @@ const seoProps = {
         </div>
       </div>
       <div class="Use-Info space-y-4">
-        <h2>How we use your information</h2>
+        <h2 class="privacy-pol">How we use your information</h2>
         <p>We use the information we collect in various ways, including to:</p>
         <div class="pl-8">
           <ul class="text-fluid-lg">
@@ -103,7 +103,7 @@ const seoProps = {
         </div>
       </div>
       <div class="block-log space-y-4">
-        <h2>Log files</h2>
+        <h2 class="privacy-pol">Log files</h2>
         <p>
           Nediak Studio follows a standard procedure of using log files. These
           files log visitors when they visit websites. All hosting companies do
@@ -118,7 +118,7 @@ const seoProps = {
         </p>
       </div>
       <div class="block-cookies space-y-4">
-        <h2>Cookies and Web Beacons</h2>
+        <h2 class="privacy-pol">Cookies and Web Beacons</h2>
         <div class="space-y-4">
           <p>
             Like any other website, Nediak Studio uses ‘cookies’. These cookies
@@ -142,7 +142,7 @@ const seoProps = {
         </div>
       </div>
       <div class="block-dart space-y-4">
-        <h2>Google DoubleClick DART Cookie</h2>
+        <h2 class="privacy-pol">Google DoubleClick DART Cookie</h2>
         <div class="space-y-4">
           <p>
             Google is one of a third-party vendor on our site. It also uses
@@ -164,7 +164,7 @@ const seoProps = {
         </div>
       </div>
       <div class="block-ad-partners space-y-4">
-        <h2>Our Advertising Partners</h2>
+        <h2 class="privacy-pol">Our Advertising Partners</h2>
 
         <p>
           Some of advertisers on our site may use cookies and web beacons. Our
@@ -192,7 +192,7 @@ const seoProps = {
         </p>
       </div>
       <div class="block-partner-pol space-y-4">
-        <h2>Advertisting Partners Privacy Policies</h2>
+        <h2 class="privacy-pol">Advertisting Partners Privacy Policies</h2>
         <div class="space-y-4">
           <p>
             You may consult this list to find the Privacy Policy for each of the
@@ -215,7 +215,7 @@ const seoProps = {
         </div>
       </div>
       <div class="block-partner-pol space-y-4">
-        <h2>Third Party Privacy Policies</h2>
+        <h2 class="privacy-pol">Third Party Privacy Policies</h2>
         <div class="space-y-4">
           <p>
             Nediak Studio’s Privacy Policy does not apply to other advertisers
@@ -233,7 +233,9 @@ const seoProps = {
         </div>
       </div>
       <div class="block-cali-law space-y-4">
-        <h2>CCPA Privacy Rights (Do Not Sell My Personal Information)</h2>
+        <h2 class="privacy-pol">
+          CCPA Privacy Rights (Do Not Sell My Personal Information)
+        </h2>
         <div class="space-y-4">
           <p>
             Under the CCPA, among other rights, California consumers have the
@@ -259,7 +261,7 @@ const seoProps = {
         </div>
       </div>
       <div class="block-gdpr space-y-4">
-        <h2>GDPR Data Protection Rights</h2>
+        <h2 class="privacy-pol">GDPR Data Protection Rights</h2>
         <div class="space-y-4">
           <p>
             We would like to make sure you are fully aware of all of your data
@@ -300,7 +302,7 @@ const seoProps = {
         </div>
       </div>
       <div class="block-kd-consent space-y-4">
-        <h2>Children’s Information</h2>
+        <h2 class="privacy-pol">Children’s Information</h2>
         <div class="space-y-4">
           <p>
             Another part of our priority is adding protection for children while

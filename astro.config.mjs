@@ -17,43 +17,30 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.local(),
-      name: "Right Grotesk",
-      cssVariable: "--font-rightGrotesk",
+      name: "Animo",
+      cssVariable: "--font-animo",
+
       options: {
         variants: [
           {
-            src: ["./src/assets/fonts/PPRightGrotesk-CompactBlack.woff2"],
-            weight: [900],
+            src: ["./src/assets/fonts/hwanimo-r500.woff2"],
+            weight: "500",
             style: "normal",
             display: "swap"
           }
         ]
       }
     },
+
     {
       provider: fontProviders.local(),
-      name: "PP Neue Medium",
-      cssVariable: "--font-neueMed",
+      name: "Inter Tight",
+      cssVariable: "--font-interTight",
       options: {
         variants: [
           {
-            src: ["./src/assets/fonts/PPNeueMontreal-Medium.woff2"],
-            weight: [500],
-            style: "normal",
-            display: "swap"
-          }
-        ]
-      }
-    },
-    {
-      provider: fontProviders.local(),
-      name: "PP Neue Reg",
-      cssVariable: "--font-neueReg",
-      options: {
-        variants: [
-          {
-            src: ["./src/assets/fonts/PPNeueMontreal-Regular.woff2"],
-            weight: [400],
+            src: ["./src/assets/fonts/InterTight-VariableFont_wght.woff2"],
+            weight: "100 900",
             style: "normal",
             display: "swap"
           }
@@ -69,7 +56,7 @@ export default defineConfig({
         variants: [
           {
             src: ["./src/assets/fonts/PPNeueMontrealMono-Medium.woff2"],
-            weight: [500],
+            weight: "500",
             style: "normal",
             display: "swap"
           }

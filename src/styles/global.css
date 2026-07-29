@@ -41,10 +41,9 @@
 }
 
 @theme inline {
-  --font-display: var(--font-rightGrotesk);
-  --font-sans: var(--font-neueReg);
+  --font-display: var(--font-animo);
+  --font-sans: var(--font-interTight);
   --font-mono: var(--font-neueMono);
-  --font-neueMed: var(--font-neueMed);
 }
 
 @layer base {
@@ -60,7 +59,7 @@
     height: auto;
     overflow-x: hidden;
     color: var(--color-copy);
-    font-family: var(--font-neueReg);
+    font-family: var(--font-interTight);
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -137,22 +136,33 @@
   }
 
   h1,
-  h2,
-  h3 {
-    @apply leading-none font-display uppercase text-dark -tracking-[.015em];
+  h2 {
+    @apply leading-none font-display text-dark -tracking-[.015em];
   }
 
   h2 {
     @apply text-fluid-6xl;
   }
+
+  h3 {
+    @apply font-sans font-medium text-dark;
+  }
   p {
     @apply leading-[1.8] text-fluid-lg text-pretty;
   }
+
+  .services {
+    @apply text-fluid-2xl text-light font-sans font-medium leading-[1.125];
+  }
   .p-large {
-    @apply leading-tight;
+    @apply leading-tight font-medium;
   }
 
   .faq .accordion-content {
     @apply text-copy;
+  }
+
+  .privacy-pol {
+    @apply text-fluid-4xl text-dark font-sans font-medium leading-[1.125];
   }
 }

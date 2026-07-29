@@ -24,7 +24,7 @@ const {
   alt,
   width,
   height,
-  class: containerClass = "h-auto w-full",
+  class: containerClass = "h-auto w-full"
 } = Astro.props;
 ---
 
@@ -50,7 +50,7 @@ const {
 
   <div class="mt-6 flex flex-col space-y-1">
     <div>
-      <ScrollHtagAnimate class="text-fluid-3xl font-bold uppercase">
+      <ScrollHtagAnimate level="3" class="text-fluid-2xl font-medium">
         {client}
         <span slot="sr" class="sr-only">{client}</span>
       </ScrollHtagAnimate>

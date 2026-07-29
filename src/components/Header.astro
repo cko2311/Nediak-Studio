@@ -1,5 +1,6 @@
 ---
 import Logo from "@/components/Logo.astro";
+import LogoAni from "@/components/LogoAni.astro";
 const menuLinks = [
   { path: "/portfolio", label: "Portfolio" },
   { path: "/studio", label: "Studio" },
@@ -22,12 +23,12 @@ const socialLinks = [
       id="menu-logo"
       class="logo font-neueMed text-xl tracking-tighter"
     >
-      <Logo class="text-light w-36" />
+      <LogoAni class="text-light w-36" />
     </a>
   </div>
 
   <nav class="hidden md:block">
-    <ul class="flex flex-row space-x-8 font-neueMed">
+    <ul class="flex flex-row space-x-8 font-medium">
       {
         menuLinks.map((link) => (
           <li>
