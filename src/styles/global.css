@@ -137,7 +137,7 @@
 
   h1,
   h2 {
-    @apply leading-none font-display text-dark -tracking-[.015em];
+    @apply leading-none font-display text-dark tracking-[-.015em];
   }
 
   h2 {
