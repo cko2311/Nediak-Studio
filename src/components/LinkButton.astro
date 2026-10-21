@@ -17,12 +17,12 @@ const { text, url, target = "_self", isActive = false } = Astro.props;
   <span class="relative h-4 overflow-hidden flex items-center font-medium">
     <span class="relative block">
       <span
-        class="h-4 flex items-center transition-transform duration-300 group-hover:-translate-y-4"
+        class="h-4 flex items-center transition-transform duration-300 group-hover:-translate-y-4 font-semibold"
       >
         {text}
       </span>
       <span
-        class="absolute top-0 left-0 h-4 flex items-center translate-y-4 transition-transform duration-300 group-hover:translate-y-0"
+        class="absolute top-0 left-0 h-4 flex items-center translate-y-4 transition-transform duration-300 group-hover:translate-y-0 font-semibold"
       >
         {text}
       </span>
