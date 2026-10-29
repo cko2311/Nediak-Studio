@@ -42,8 +42,8 @@
 
 @theme inline {
   --font-display: var(--font-animo);
-  --font-sans: var(--font-interTight);
-  --font-mono: var(--font-neueMono);
+  --font-sans: var(--font-geist);
+  --font-mono: var(--font-geistMono);
 }
 
 @layer base {
@@ -59,8 +59,8 @@
     height: auto;
     overflow-x: hidden;
     color: var(--color-copy);
-    font-family: var(--font-interTight);
-    font-weight: 400;
+    font-family: var(--font-geist);
+    font-weight: 500;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -135,24 +135,23 @@
     height: 100%;
   }
 
-  h1,
-  h2 {
+  h1 {
     @apply leading-none font-display text-dark tracking-[-.015em];
   }
 
   h2 {
-    @apply text-fluid-6xl;
+    @apply leading-none font-sans text-fluid-6xl font-bold;
   }
 
   h3 {
-    @apply font-sans font-medium text-dark;
+    @apply leading-none font-sans font-bold text-dark;
   }
   p {
     @apply leading-[1.8] text-fluid-lg text-pretty;
   }
 
   .services {
-    @apply text-fluid-2xl text-light font-sans font-medium leading-[1.125];
+    @apply text-fluid-2xl text-light font-sans font-bold leading-[1.125];
   }
   .p-large {
     @apply leading-tight font-medium;

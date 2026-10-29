@@ -34,12 +34,12 @@ export default defineConfig({
 
     {
       provider: fontProviders.local(),
-      name: "Inter Tight",
-      cssVariable: "--font-interTight",
+      name: "Geist",
+      cssVariable: "--font-geist",
       options: {
         variants: [
           {
-            src: ["./src/assets/fonts/InterTight-VariableFont_wght.woff2"],
+            src: ["./src/assets/fonts/geist[wght].woff2"],
             weight: "100 900",
             style: "normal",
             display: "swap"
@@ -50,12 +50,12 @@ export default defineConfig({
 
     {
       provider: fontProviders.local(),
-      name: "PP Neue Mono",
-      cssVariable: "--font-neueMono",
+      name: "Geist Mono",
+      cssVariable: "--font-geistMono",
       options: {
         variants: [
           {
-            src: ["./src/assets/fonts/PPNeueMontrealMono-Medium.woff2"],
+            src: ["./src/assets/fonts/GeistMono[wght].woff2"],
             weight: "500",
             style: "normal",
             display: "swap"

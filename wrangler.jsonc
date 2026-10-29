@@ -1,22 +1,10 @@
 {
   "name": "nediak-studio",
   "compatibility_date": "2026-04-03",
-  "pages_build_output_dir": "./dist",
   "assets": {
-    "directory": "./dist",
-    "binding": "CF_PAGES_ASSETS"
+    "directory": "./dist"
   },
   "observability": {
     "enabled": true
-  },
-  "routes": [
-    {
-      "pattern": "nediakstudio.com",
-      "custom_domain": true
-    },
-    {
-      "pattern": "www.nediakstudio.com",
-      "custom_domain": true
-    }
-  ]
+  }
 }
