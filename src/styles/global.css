@@ -140,18 +140,18 @@
   }
 
   h2 {
-    @apply leading-none font-sans text-fluid-6xl font-bold;
+    @apply leading-none font-sans text-fluid-6xl font-bold tracking-tighter;
   }
 
   h3 {
-    @apply leading-none font-sans font-bold text-dark;
+    @apply leading-none font-sans font-bold text-dark tracking-tighter;
   }
   p {
     @apply leading-[1.8] text-fluid-lg text-pretty;
   }
 
   .services {
-    @apply text-fluid-2xl text-light font-sans font-bold leading-[1.125];
+    @apply text-fluid-2xl text-light font-sans font-bold leading-[1.125] tracking-tighter;
   }
   .p-large {
     @apply leading-tight font-medium;
