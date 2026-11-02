@@ -8,8 +8,8 @@
     left: 0;
     width: 0.75rem;
     height: 0.75rem;
-    background-color: var(--color-copy); /* Use your new Rose accent! */
-    border: 1.5px solid var(--color-copy);
+    background-color: var(--color-brand); /* Use your new Rose accent! */
+    border: 1.5px solid var(--color-brand);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
@@ -28,7 +28,7 @@
   .cursor.is-active {
     width: 75px;
     height: 75px;
-    background-color: oklch(from var(--color-copy) l c h / 0.85);
+    background-color: oklch(from var(--color-brand) l c h / 0.85);
     opacity: 1;
   }
 
@@ -42,7 +42,7 @@
   .cursor-text {
     font-size: var(--text-fluid-xs);
     text-transform: uppercase;
-    color: var(--color-brand);
+    color: var(--color-light);
     opacity: 0;
     white-space: nowrap;
     font-weight: 600;
@@ -99,7 +99,7 @@
         x: e.clientX,
         y: e.clientY,
         duration: 0.5,
-        ease: "power3.out",
+        ease: "power3.out"
       });
     });
 
