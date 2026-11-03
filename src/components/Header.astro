@@ -1,11 +1,12 @@
 ---
 import Logo from "@/components/Logo.astro";
 import LogoAni from "@/components/LogoAni.astro";
+import LinkButton from "@/components/LinkButton.astro";
 const menuLinks = [
   { path: "/portfolio", label: "Portfolio" },
   { path: "/studio", label: "Studio" },
   { path: "/process", label: "Process" },
-  { path: "/contact", label: "Contact" }
+  { path: "/contact", label: "Contact", mobileOnly: true }
 ];
 
 const socialLinks = [
@@ -15,32 +16,36 @@ const socialLinks = [
 ---
 
 <header
-  class="fixed top-0 left-0 w-full py-fluid-sm px-fluid-md flex justify-between items-center mix-blend-difference text-light z-9999"
+  class="fixed top-0 left-0 w-full py-fluid-sm px-fluid-md flex justify-between items-center text-light z-9999"
 >
-  <div class="z-100">
+  <div class="z-99999">
     <a
       href="/"
       id="menu-logo"
-      class="logo font-neueMed text-xl tracking-tighter"
+      class="logo font-neueMed text-xl tracking-tighter text-dark"
     >
-      <LogoAni class="text-light w-36" />
+      <!-- Removed text-dark here so it inherits color from #menu-logo -->
+      <LogoAni class="w-36" />
     </a>
   </div>
 
   <nav class="hidden md:block">
-    <ul class="flex flex-row space-x-8 font-medium">
+    <ul class="flex flex-row md:items-center space-x-8 font-medium">
       {
         menuLinks.map((link) => (
-          <li>
+          <li class={link.mobileOnly ? "md:hidden" : ""}>
             <a
               href={link.path}
-              class="dsk-menu-link hover:opacity-70 transition-opacity"
+              class="text-dark hover:text-brand after:bg-brand relative inline-block w-fit transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-[calc(100%-1px)] after:origin-right after:scale-x-0 after:transition-transform after:duration-400 after:ease-in after:content-[''] hover:after:origin-left hover:after:scale-x-100"
             >
               {link.label}
             </a>
           </li>
         ))
       }
+      <div>
+        <LinkButton text="Start A Project" />
+      </div>
     </ul>
   </nav>
 
@@ -49,7 +54,9 @@ const socialLinks = [
     class="md:hidden relative h-8 w-24 overflow-hidden flex items-center justify-end focus:outline-none"
     aria-expanded="false"
   >
-    <span id="menu-open" class="absolute right-0 font-medium">Menu</span>
+    <span id="menu-open" class="absolute right-0 font-medium text-dark"
+      >Menu</span
+    >
     <span
       id="menu-close"
       class="absolute right-0 font-semibold opacity-0 translate-y-full"
@@ -61,14 +68,14 @@ const socialLinks = [
 
 <div
   id="menu-overlay"
-  class="invisible fixed inset-0 z-90 bg-dark flex flex-col justify-between p-fluid-md pointer-events-none md:hidden"
+  class="invisible fixed inset-0 z-90 bg-dark flex flex-col justify-around p-fluid-md pointer-events-none md:hidden"
 >
-  <div class="mt-18 flex flex-col space-y-4">
+  <div class="flex flex-col space-y-4 my-auto">
     {
       menuLinks.map((link) => (
         <a
           href={link.path}
-          class="menu-link text-light font-medium text-6xl w-fit hover:text-gray-400 transition-colors"
+          class="menu-link text-light font-bold text-6xl w-fit hover:text-brand transition-colors"
         >
           {link.label}
         </a>
@@ -76,14 +83,8 @@ const socialLinks = [
     }
   </div>
 
-  <div class="flex flex-col font-mono mt-8 flex-1 justify-around">
-    <div>
-      <p class="text-sm uppercase text-neutral">Nediak Studio</p>
-      <p class="text-sm uppercase text-neutral">New Jersey, USA</p>
-      <p class="text-sm uppercase text-neutral">40.0583° N, 74.4057° W</p>
-    </div>
-
-    <div class="flex flex-col text-sm uppercase text-neutral">
+  <div class="flex flex-col text-sm uppercase text-neutral space-y-4 mt-auto">
+    <div class="flex flex-col">
       {
         socialLinks.map((social) => (
           <a href={social.path} target="_blank" class="hover:text-gray-400">
@@ -114,6 +115,13 @@ const socialLinks = [
   header a {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Force the logo and its internal SVG/paths to pick up the animated color property */
+  #menu-logo,
+  #menu-logo :global(svg),
+  #menu-logo :global(path) {
+    fill: currentColor;
   }
 </style>
 
@@ -173,7 +181,12 @@ const socialLinks = [
         0
       )
       .to(openLabel, { y: "-100%", opacity: 0 }, 0)
-      .to(closeLabel, { y: "0%", opacity: 1 }, 0);
+      .to(closeLabel, { y: "0%", opacity: 1 }, 0)
+      .to(
+        logo,
+        { color: "#fefcf6", duration: 0.6 },
+        0.15 // Delayed start point (0.15s into the timeline)
+      );
 
     function handleToggle(url = null) {
       if (isAnimating) return;

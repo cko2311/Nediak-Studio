@@ -12,17 +12,17 @@ const { text, url, target = "_self", isActive = false } = Astro.props;
 <a
   href={url}
   target={target}
-  class="group btn-animate bg-brand text-light flex w-fit items-center gap-3 rounded-md px-6 py-4 text-sm uppercase outline-none transition-all focus:ring-2 focus:ring-light"
+  class="group btn-animate bg-brand text-light flex w-fit items-center gap-3 rounded-md px-3 py-3 text-sm outline-none transition-all focus:ring-2 focus:ring-light"
 >
-  <span class="relative h-4 overflow-hidden flex items-center font-medium">
+  <span class="relative h-4 overflow-hidden flex items-center">
     <span class="relative block">
       <span
-        class="h-4 flex items-center transition-transform duration-300 group-hover:-translate-y-4 font-semibold"
+        class="h-4 flex items-center transition-transform duration-300 group-hover:-translate-y-4 font-medium"
       >
         {text}
       </span>
       <span
-        class="absolute top-0 left-0 h-4 flex items-center translate-y-4 transition-transform duration-300 group-hover:translate-y-0 font-semibold"
+        class="absolute top-0 left-0 h-4 flex items-center translate-y-4 transition-transform duration-300 group-hover:translate-y-0 font-medium"
       >
         {text}
       </span>
