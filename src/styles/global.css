@@ -136,15 +136,15 @@
   }
 
   h1 {
-    @apply leading-none font-display text-dark tracking-[-.015em];
+    @apply leading-none font-display text-dark tracking-tight;
   }
 
   h2 {
-    @apply leading-none font-sans text-fluid-6xl font-bold tracking-tighter text-dark;
+    @apply leading-none font-sans text-fluid-6xl font-bold tracking-tight text-dark;
   }
 
   h3 {
-    @apply leading-none font-sans font-bold text-dark tracking-tighter;
+    @apply leading-none font-sans font-bold text-dark tracking-tight;
   }
   p {
     @apply leading-[1.8] text-fluid-lg text-pretty;
