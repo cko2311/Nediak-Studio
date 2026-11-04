@@ -140,18 +140,18 @@
   }
 
   h2 {
-    @apply leading-none font-sans text-fluid-6xl font-bold tracking-tight text-dark;
+    @apply leading-none font-sans text-fluid-6xl font-extrabold tracking-tight text-dark;
   }
 
   h3 {
-    @apply leading-none font-sans font-bold text-dark tracking-tight;
+    @apply leading-none font-sans font-extrabold text-dark tracking-tight;
   }
   p {
     @apply leading-[1.8] text-fluid-lg text-pretty;
   }
 
   .services {
-    @apply text-fluid-2xl text-light font-sans font-bold leading-[1.125] tracking-tighter;
+    @apply text-fluid-2xl text-light font-sans font-extrabold leading-[1.125] tracking-tighter;
   }
   .p-large {
     @apply leading-tight font-medium;
