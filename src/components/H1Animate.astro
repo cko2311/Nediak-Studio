@@ -2,13 +2,21 @@
 interface Props {
   level?: 1 | 2 | 3 | 4 | 5 | 6;
   class?: string;
+  isHome?: boolean; // 1. Add the new prop
 }
 
-const { level = 1, class: className } = Astro.props;
+const { level = 1, class: className, isHome = false } = Astro.props;
 const Tag = `h${level}`;
+
+// 2. Define the delays dynamically based on whether it's the home page
+const animationDelay = isHome ? 1.2 : 0.75;
 ---
 
-<Tag class={`hero-heading relative ${className || ""}`}>
+<!-- 3. Pass the delay value to the client using a data attribute -->
+<Tag 
+  class={`hero-heading relative ${className || ""}`}
+  data-delay={animationDelay}
+>
   <!-- Animated visual text (decorative only) -->
   <span
     class="hero-split-heading"
@@ -58,52 +66,55 @@ const Tag = `h${level}`;
   let ctx;
 
   const runHeroAnimation = () => {
-    // 1. Cleanup previous instance to prevent memory leaks/double-splitting
     if (ctx) ctx.revert();
 
-    // 2. Use gsap.context to scope everything to the current page
     ctx = gsap.context(() => {
-      const elements = gsap.utils.toArray(".hero-split-heading");
+      const headings = gsap.utils.toArray(".hero-heading");
 
-      elements.forEach((element) => {
-        // Ensure element is visible before splitting
+      headings.forEach((heading: any) => {
+        // 4. Read the specific delay configured on this heading instance
+        const delay = parseFloat(heading.dataset.delay || "0");
+        const element = heading.querySelector(".hero-split-heading");
+
+        if (!element) return;
+
         gsap.set(element, { opacity: 1, visibility: "visible" });
 
         const split = new SplitText(element, {
           types: "lines",
           mask: "lines",
-          linesClass: "lineParent", // Helper for masking
+          linesClass: "lineParent",
           autoSplit: true,
         });
 
-        // Optional: Wrap lines for a "reveal from nothing" effect
         new SplitText(element, {
           types: "lines",
           mask: "lines",
           linesClass: "lineChild",
         });
 
-        gsap.set(".lineChild", {
+        // Scope line selection to this specific heading to prevent cross-contamination if multiple exist
+        const lines = heading.querySelectorAll(".lineChild");
+
+        gsap.set(lines, {
           yPercent: 200,
           autoAlpha: 0,
         });
 
-        gsap.to(".lineChild", {
+        gsap.to(lines, {
           yPercent: 0,
           autoAlpha: 1,
           duration: DURATION,
           ease: "expo.out",
           stagger: 0.075,
-          delay: 1.2,
+          delay: delay, // 5. Apply the dynamic delay here
         });
       });
     });
   };
 
-  // The secret sauce: Listen for astro:page-load
-  // This fires on initial load AND every navigation (Back/Forward/Link)
   document.addEventListener("DOMContentLoaded", () => {
-    // Wait for fonts to ensure SplitText calculates line breaks correctly
     document.fonts.ready.then(runHeroAnimation);
   });
 </script>
+
