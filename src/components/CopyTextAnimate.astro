@@ -14,21 +14,21 @@ const Tag = as;
   as === "a" ? (
     <a
       href={href}
-      class="scroll-paragraph-item opacity-0"
+      data-copy-animate
+      class="opacity-0"
       class:list={[className]}
       aria-hidden="true"
     >
-      {/* 1. Inject the inline spacer right before the text */}
       {indent && <span class="indent-spacer" aria-hidden="true" />}
       <slot />
     </a>
   ) : (
     <Tag
-      class="scroll-paragraph-item opacity-0"
+      data-copy-animate
+      class="opacity-0"
       class:list={[className]}
       aria-hidden="true"
     >
-      {/* 1. Inject the inline spacer right before the text */}
       {indent && <span class="indent-spacer" aria-hidden="true" />}
       <slot />
     </Tag>
@@ -38,22 +38,21 @@ const Tag = as;
 <slot name="sr" />
 
 <style>
-  .scroll-paragraph-item {
+  [data-copy-animate] {
     font-kerning: none;
     text-rendering: optimizeSpeed;
     display: block;
     will-change: transform;
   }
 
-  /* 2. Handle the responsive indent via pure CSS */
   .indent-spacer {
-    display: none; /* Hidden on mobile */
+    display: none;
   }
 
   @media (min-width: 1040px) {
     .indent-spacer {
       display: inline-block;
-      width: 10rem; /* Match your desired indent width here */
+      width: 10rem;
     }
   }
 
@@ -71,26 +70,23 @@ const Tag = as;
 </style>
 
 <script>
-  import { gsap, SplitText, DURATION, EASE, ScrollTrigger } from "@/lib/gsap";
+  import { gsap, SplitText, ScrollTrigger } from "@/lib/gsap";
 
-  let ctx;
+  let ctx: gsap.Context | undefined;
 
   const runAnimation = () => {
-    // 1. CLEANUP: Revert any existing SplitText/ScrollTriggers from the previous page
     if (ctx) ctx.revert();
 
     ctx = gsap.context(() => {
-      const elements = gsap.utils.toArray(".scroll-paragraph-item");
+      const elements = gsap.utils.toArray<HTMLElement>("[data-copy-animate]");
 
-      elements.forEach((element: any) => {
-        // Create the SplitText instance
+      elements.forEach((element) => {
         const split = SplitText.create(element, {
           types: "lines",
           mask: "lines",
           linesClass: "line",
-          autoSplit: true, // This handles screen resizing
+          autoSplit: true,
           onSplit: (self) => {
-            // GSAP Context will track this animation automatically
             gsap.set(self.lines, { yPercent: 200 });
             element.classList.remove("opacity-0");
 
@@ -98,7 +94,6 @@ const Tag = as;
               scrollTrigger: {
                 trigger: element,
                 start: "top 80%",
-                // toggleActions: "play none none none"
               },
               yPercent: 0,
               duration: 1.5,
@@ -106,20 +101,25 @@ const Tag = as;
               stagger: 0.075,
             });
 
-            // Return the tween so SplitText can manage it if it re-splits
             return tween;
           },
         });
       });
     });
 
-    // Refresh ScrollTrigger to account for new page height
     ScrollTrigger.refresh();
   };
 
-  // 2. LIFECYCLE: This replaces your Promise.all logic
-  document.addEventListener("DOMContentLoaded", () => {
-    // Wait for fonts to ensure SplitText calculates lines correctly
-    document.fonts.ready.then(runAnimation);
-  });
+  const init = () => {
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(runAnimation);
+    } else {
+      runAnimation();
+    }
+  };
+
+  document.addEventListener("DOMContentLoaded", init);
+  document.addEventListener("astro:page-load", init);
 </script>
+
+

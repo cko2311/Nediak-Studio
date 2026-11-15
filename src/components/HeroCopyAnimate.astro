@@ -14,7 +14,8 @@ const Tag = as;
   as === "a" ? (
     <a
       href={href}
-      class="hero-copy opacity-0"
+      data-hero-copy
+      class="opacity-0"
       class:list={[className]}
       aria-hidden="true"
     >
@@ -23,7 +24,8 @@ const Tag = as;
     </a>
   ) : (
     <Tag
-      class="hero-copy opacity-0 overflow-hidden "
+      data-hero-copy
+      class="opacity-0 overflow-hidden"
       class:list={[className]}
       aria-hidden="true"
     >
@@ -36,13 +38,12 @@ const Tag = as;
 <slot name="sr" />
 
 <style>
-  .scroll-paragraph-item {
+  [data-hero-copy] {
     overflow: hidden;
     font-kerning: none;
     text-rendering: optimizeSpeed;
     display: block;
     will-change: transform;
-    overflow: hidden;
   }
 
   .indent-spacer {
@@ -72,16 +73,16 @@ const Tag = as;
 <script>
   import { gsap, SplitText } from "@/lib/gsap";
 
-  let ctx;
+  let ctx: gsap.Context | undefined;
 
   const runAnimation = () => {
     // 1. CLEANUP: Revert any existing SplitText from the previous page
     if (ctx) ctx.revert();
 
     ctx = gsap.context(() => {
-      const elements = gsap.utils.toArray(".hero-copy");
+      const elements = gsap.utils.toArray<HTMLElement>("[data-hero-copy]");
 
-      elements.forEach((element: any) => {
+      elements.forEach((element) => {
         // Create the SplitText instance
         const split = SplitText.create(element, {
           types: "lines",
@@ -110,8 +111,15 @@ const Tag = as;
   };
 
   // 2. LIFECYCLE: Handle initial load and Astro view transitions
-  document.addEventListener("DOMContentLoaded", () => {
-    // Ensuring fonts are loaded is critical for SplitText line calculations
-    document.fonts.ready.then(runAnimation);
-  });
+  const init = () => {
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(runAnimation);
+    } else {
+      runAnimation();
+    }
+  };
+
+  document.addEventListener("DOMContentLoaded", init);
+  document.addEventListener("astro:page-load", init);
 </script>
+

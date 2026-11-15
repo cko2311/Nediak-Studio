@@ -11,7 +11,7 @@ const Tag = `h${level}`;
 <Tag class={`scroll-heading relative ${className || ""}`}>
   <!-- Animated visual text (hidden from screen readers) -->
   <span
-    class="scroll-heading-item"
+    data-heading-scroll
     aria-hidden="true"
     style="opacity:0;visibility:hidden"
   >
@@ -28,7 +28,7 @@ const Tag = `h${level}`;
     display: inline-block;
   }
 
-  .scroll-heading-item {
+  [data-heading-scroll] {
     overflow: hidden;
     display: inline-block;
     font-kerning: none;
@@ -53,16 +53,16 @@ const Tag = `h${level}`;
   import { gsap, SplitText, DURATION, EASE, ScrollTrigger } from "@/lib/gsap";
 
   // 1. Keep context outside the function to persist across navigation
-  let headingCtx;
+  let headingCtx: gsap.Context | undefined;
 
   const runScrollHeadingAnimation = () => {
     // 2. CLEANUP: Revert previous instances and kill dead ScrollTriggers
     if (headingCtx) headingCtx.revert();
 
     headingCtx = gsap.context(() => {
-      const scrollHeadingItems = gsap.utils.toArray(".scroll-heading-item");
+      const scrollHeadingItems = gsap.utils.toArray<HTMLElement>("[data-heading-scroll]");
 
-      scrollHeadingItems.forEach((element: any) => {
+      scrollHeadingItems.forEach((element) => {
         // Ensure the element is ready for animation
         gsap.set(element, { opacity: 1, visibility: "visible" });
 
@@ -95,8 +95,15 @@ const Tag = `h${level}`;
     ScrollTrigger.refresh();
   };
 
-  // 5. LIFECYCLE: Standardize on astro:page-load for View Transitions
-  document.addEventListener("DOMContentLoaded", () => {
-    document.fonts.ready.then(runScrollHeadingAnimation);
-  });
+  // 5. LIFECYCLE: Handle initial load and Astro client-side page transitions
+  const init = () => {
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(runScrollHeadingAnimation);
+    } else {
+      runScrollHeadingAnimation();
+    }
+  };
+
+  document.addEventListener("DOMContentLoaded", init);
+  document.addEventListener("astro:page-load", init);
 </script>

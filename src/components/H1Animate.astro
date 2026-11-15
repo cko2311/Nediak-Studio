@@ -2,24 +2,20 @@
 interface Props {
   level?: 1 | 2 | 3 | 4 | 5 | 6;
   class?: string;
-  isHome?: boolean; // 1. Add the new prop
+  isHome?: boolean;
 }
 
 const { level = 1, class: className, isHome = false } = Astro.props;
 const Tag = `h${level}`;
 
-// 2. Define the delays dynamically based on whether it's the home page
 const animationDelay = isHome ? 1.2 : 0.75;
 ---
 
-<!-- 3. Pass the delay value to the client using a data attribute -->
-<Tag 
-  class={`hero-heading relative ${className || ""}`}
-  data-delay={animationDelay}
->
+<Tag class={`relative ${className || ""}`}>
   <!-- Animated visual text (decorative only) -->
   <span
-    class="hero-split-heading"
+    data-heading-load
+    data-delay={animationDelay}
     style="opacity:0;visibility:hidden"
     aria-hidden="true"
   >
@@ -31,19 +27,18 @@ const animationDelay = isHome ? 1.2 : 0.75;
 </Tag>
 
 <style>
-  .hero-heading {
-    position: relative;
+  [data-heading-load] {
     display: block;
     overflow: hidden;
-  }
-
-  .hero-split-heading span {
-    display: inline-block;
     font-kerning: none;
     text-rendering: optimizeSpeed;
-    opacity: 0;
-    visibility: hidden;
     will-change: transform;
+  }
+
+  :global(.lineParent) {
+    overflow-y: hidden !important; /* Keeps the vertical slide-up mask */
+    overflow-x: visible !important; /* Allows horizontal glyph overhang */
+    width: 100% !important; /* Defeats GSAP's strict inline width */
   }
 
   /* Screen-reader only version */
@@ -63,20 +58,16 @@ const animationDelay = isHome ? 1.2 : 0.75;
 <script>
   import { gsap, SplitText, DURATION, EASE } from "@/lib/gsap";
 
-  let ctx;
+  let ctx: gsap.Context | undefined;
 
   const runHeroAnimation = () => {
     if (ctx) ctx.revert();
 
     ctx = gsap.context(() => {
-      const headings = gsap.utils.toArray(".hero-heading");
+      const elements = gsap.utils.toArray<HTMLElement>("[data-heading-load]");
 
-      headings.forEach((heading: any) => {
-        // 4. Read the specific delay configured on this heading instance
-        const delay = parseFloat(heading.dataset.delay || "0");
-        const element = heading.querySelector(".hero-split-heading");
-
-        if (!element) return;
+      elements.forEach((element) => {
+        const delay = parseFloat(element.dataset.delay || "0");
 
         gsap.set(element, { opacity: 1, visibility: "visible" });
 
@@ -93,8 +84,7 @@ const animationDelay = isHome ? 1.2 : 0.75;
           linesClass: "lineChild",
         });
 
-        // Scope line selection to this specific heading to prevent cross-contamination if multiple exist
-        const lines = heading.querySelectorAll(".lineChild");
+        const lines = element.querySelectorAll(".lineChild");
 
         gsap.set(lines, {
           yPercent: 200,
@@ -107,14 +97,18 @@ const animationDelay = isHome ? 1.2 : 0.75;
           duration: DURATION,
           ease: "expo.out",
           stagger: 0.075,
-          delay: delay, // 5. Apply the dynamic delay here
+          delay: delay,
         });
       });
     });
   };
 
   document.addEventListener("DOMContentLoaded", () => {
-    document.fonts.ready.then(runHeroAnimation);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(runHeroAnimation);
+    } else {
+      runHeroAnimation();
+    }
   });
 </script>
 

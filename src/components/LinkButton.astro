@@ -12,7 +12,8 @@ const { text, url, target = "_self", isActive = false } = Astro.props;
 <a
   href={url}
   target={target}
-  class="group btn-animate bg-brand text-light flex w-fit items-center gap-3 rounded-md px-3 py-3 text-sm outline-none transition-all focus:ring-2 focus:ring-light"
+  data-button-animate
+  class="group bg-brand text-light flex w-fit items-center gap-3 rounded-md px-3 py-3 text-sm outline-none transition-all focus:ring-2 focus:ring-light"
 >
   <span class="relative h-4 overflow-hidden flex items-center">
     <span class="relative block">
@@ -39,19 +40,35 @@ const { text, url, target = "_self", isActive = false } = Astro.props;
 <script>
   import { gsap, EASE, DURATION, ScrollTrigger } from "@/lib/gsap";
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const buttons = document.querySelectorAll(".btn-animate");
+  let ctx: gsap.Context | undefined;
 
-    buttons.forEach((btn) => {
-      gsap.from(btn, {
-        scrollTrigger: {
-          trigger: btn,
-          start: "top 90%" // when button enters viewport
-        },
-        autoAlpha: 0,
-        duration: 0.35,
-        ease: "expo.inOut"
+  const initButtonAnimation = () => {
+    if (ctx) ctx.revert();
+
+    ctx = gsap.context(() => {
+      const buttons = document.querySelectorAll<HTMLElement>("[data-button-animate]");
+
+      buttons.forEach((btn) => {
+        gsap.from(btn, {
+          scrollTrigger: {
+            trigger: btn,
+            start: "top 90%" // when button enters viewport
+          },
+          autoAlpha: 0,
+          duration: 0.35,
+          ease: "expo.inOut"
+        });
       });
     });
-  });
+
+    ScrollTrigger.refresh();
+  };
+
+  const init = () => {
+    initButtonAnimation();
+  };
+
+  document.addEventListener("DOMContentLoaded", init);
+  document.addEventListener("astro:page-load", init);
 </script>
+
