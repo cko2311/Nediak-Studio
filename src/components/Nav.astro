@@ -1,0 +1,358 @@
+---
+import LogoAni from "@/components/LogoAni.astro";
+import LinkButton from "@/components/LinkButton.astro";
+
+const menuLinks = [
+  { path: "/studio", label: "Studio" },
+  { path: "/portfolio", label: "Portfolio" },
+  { path: "/process", label: "Process" },
+  { path: "/contact", label: "Contact", mobileOnly: true }
+];
+
+const socialLinks = [
+  { path: "https://x.com/nediakstudio", label: "X (Twitter)" },
+  { path: "https://www.instagram.com/nediakstudio/", label: "Instagram" }
+];
+---
+
+<header
+  class="fixed top-0 left-0 w-full py-fluid-sm px-fluid-md flex justify-between items-center text-light z-9999"
+>
+  <div class="z-99999">
+    <a
+      href="/"
+      data-menu-logo
+      class="logo font-neueMed text-xl tracking-tighter text-dark"
+    >
+      <LogoAni class="w-36" />
+    </a>
+  </div>
+
+  <!-- Desktop Navigation -->
+  <nav class="hidden md:block">
+    <ul class="flex flex-row md:items-center space-x-8 font-medium">
+      {
+        menuLinks.map((link) => (
+          <li class={link.mobileOnly ? "md:hidden" : ""}>
+            <a
+              href={link.path}
+              class="text-dark hover:text-brand after:bg-brand relative inline-block w-fit transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-[calc(100%-1px)] after:origin-right after:scale-x-0 after:transition-transform after:duration-400 after:ease-in after:content-[''] hover:after:origin-left hover:after:scale-x-100"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+      <div>
+        <LinkButton text="Start A Project" url="/contact" />
+      </div>
+    </ul>
+  </nav>
+
+  <!-- Mobile Menu Toggle Button -->
+  <button
+    data-menu-toggle
+    class="md:hidden relative h-8 w-24 overflow-hidden flex items-center justify-end focus:outline-none cursor-pointer"
+    aria-expanded="false"
+    aria-label="Toggle Menu"
+  >
+    <span data-menu-open class="absolute right-0 font-medium text-dark">Menu</span>
+    <span
+      data-menu-close
+      class="absolute right-0 font-semibold opacity-0 translate-y-full text-light"
+    >
+      Close
+    </span>
+  </button>
+</header>
+
+<!-- Mobile Fullscreen Overlay -->
+<div
+  data-menu-overlay
+  class="fixed inset-0 z-90 bg-neutral-950 text-light flex flex-col justify-between p-fluid-md pointer-events-none opacity-0 md:hidden will-change-[clip-path,opacity]"
+>
+  <div class="flex flex-col space-y-4 my-auto pt-16">
+    {
+      menuLinks.map((link) => (
+        <a
+          href={link.path}
+          data-menu-link
+          class="text-light font-bold text-5xl sm:text-6xl w-fit hover:text-brand transition-colors block"
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </div>
+
+  <div class="flex flex-col text-sm uppercase text-neutral space-y-4 pb-8">
+    <div class="flex flex-col space-y-1">
+      {
+        socialLinks.map((social) => (
+          <a
+            href={social.path}
+            target="_blank"
+            rel="noreferrer"
+            data-social-link
+            class="text-sm uppercase text-neutral hover:text-light transition-colors block w-fit font-medium"
+          >
+            {social.label}
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="flex flex-col text-sm uppercase">
+      <a
+        href="mailto:info@nediakstudio.com"
+        data-contact-link
+        class="text-sm font-medium text-neutral uppercase hover:text-light transition-colors block w-fit"
+      >
+        info@nediakstudio.com
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  header a {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  [data-menu-logo],
+  [data-menu-logo] :global(svg),
+  [data-menu-logo] :global(path) {
+    fill: currentColor;
+  }
+</style>
+
+<script>
+  import { gsap, SplitText } from "@/lib/gsap";
+  import { navigate } from "astro:transitions/client";
+
+  let ctx;
+
+  function initMenu() {
+    if (ctx) ctx.revert();
+
+    ctx = gsap.context(() => {
+      const toggle = document.querySelector("[data-menu-toggle]");
+      const logo = document.querySelector("[data-menu-logo]");
+      const overlay = document.querySelector("[data-menu-overlay]");
+      const openLabel = document.querySelector("[data-menu-open]");
+      const closeLabel = document.querySelector("[data-menu-close]");
+      const links = document.querySelectorAll("[data-menu-link]");
+      const socialLinks = document.querySelectorAll("[data-social-link]");
+      const contactLinks = document.querySelectorAll("[data-contact-link]");
+
+      if (!toggle || !overlay) return;
+
+      let isOpen = false;
+      let isAnimating = false;
+      let pendingUrl = null;
+
+      // 1. Set initial closed state for the polygon clip-path via GSAP
+      gsap.set(overlay, {
+        clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+        opacity: 0,
+        pointerEvents: "none"
+      });
+
+      // 2. Split main menu links by line with masking enabled
+      let allLines = [];
+      links.forEach((link) => {
+        const split = SplitText.create(link, {
+          types: "lines",
+          mask: "lines",
+          linesClass: "line"
+        });
+        if (split.lines) {
+          allLines.push(...split.lines);
+        }
+      });
+
+      // 3. Split social links by line with masking enabled
+      let socialLines = [];
+      socialLinks.forEach((link) => {
+        const split = SplitText.create(link, {
+          types: "lines",
+          mask: "lines",
+          linesClass: "line"
+        });
+        if (split.lines) {
+          socialLines.push(...split.lines);
+        }
+      });
+
+      // 4. Split contact links by line with masking enabled
+      let contactLines = [];
+      contactLinks.forEach((link) => {
+        const split = SplitText.create(link, {
+          types: "lines",
+          mask: "lines",
+          linesClass: "line"
+        });
+        if (split.lines) {
+          contactLines.push(...split.lines);
+        }
+      });
+
+      // Initial state: hide all lines below their masks
+      gsap.set([...allLines, ...socialLines, ...contactLines], { yPercent: 200 });
+
+      // 5. Master Open Timeline
+      const openTl = gsap.timeline({
+        paused: true,
+        defaults: { duration: 0.8, ease: "power4.inOut" },
+        onStart: () => {
+          isAnimating = true;
+        },
+        onComplete: () => {
+          isAnimating = false;
+        }
+      });
+
+      openTl
+        .to(
+          overlay,
+          {
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            opacity: 1,
+            pointerEvents: "auto"
+          },
+          0
+        )
+        .to(openLabel, { y: "-100%", opacity: 0 }, 0)
+        .to(closeLabel, { y: "0%", opacity: 1 }, 0)
+        .to(logo, { color: "#fefcf6", duration: 0.6 }, 0.15);
+
+      if (allLines.length > 0) {
+        openTl.to(
+          allLines,
+          { yPercent: 0, duration: 1.2, ease: "expo.out", stagger: 0.075 },
+          0.3
+        );
+      }
+
+      if (socialLines.length > 0) {
+        openTl.to(
+          socialLines,
+          { yPercent: 0, duration: 1.0, ease: "expo.out", stagger: 0.05 },
+          0.45
+        );
+      }
+
+      if (contactLines.length > 0) {
+        openTl.to(
+          contactLines,
+          { yPercent: 0, duration: 1.0, ease: "expo.out", stagger: 0.05 },
+          0.55
+        );
+      }
+
+      // 6. Dedicated Close Function with Smooth Upward Polygon Wipe
+      function closeMenu(url = null) {
+        if (isAnimating) return;
+        isAnimating = true;
+        isOpen = false;
+        pendingUrl = url;
+
+        toggle.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+
+        // Pause open timeline if it was active
+        openTl.pause();
+
+        const closeTl = gsap.timeline({
+          onComplete: () => {
+            isAnimating = false;
+            // Reset text line positions for next open
+            gsap.set([...allLines, ...socialLines, ...contactLines], { yPercent: 200 });
+            if (pendingUrl) {
+              navigate(pendingUrl);
+              pendingUrl = null;
+            }
+          }
+        });
+
+        closeTl
+          .to(
+            overlay,
+            {
+              clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+              opacity: 0,
+              pointerEvents: "none",
+              duration: 0.7,
+              ease: "power4.inOut"
+            },
+            0
+          )
+          .to(openLabel, { y: "0%", opacity: 1, duration: 0.5 }, 0)
+          .to(closeLabel, { y: "100%", opacity: 0, duration: 0.5 }, 0)
+          .to(logo, { color: "", duration: 0.4 }, 0)
+          .to(
+            [...allLines, ...socialLines, ...contactLines],
+            {
+              yPercent: 200,
+              duration: 0.4,
+              ease: "power3.in",
+              stagger: 0.015
+            },
+            0
+          );
+      }
+
+      function handleToggle(url = null) {
+        if (isAnimating) return;
+
+        if (!isOpen) {
+          pendingUrl = null;
+          isOpen = true;
+          toggle.setAttribute("aria-expanded", "true");
+          document.body.style.overflow = "hidden";
+          openTl.play(0);
+        } else {
+          closeMenu(url);
+        }
+      }
+
+      toggle.addEventListener("click", () => handleToggle());
+
+      logo?.addEventListener("click", (e) => {
+        if (isOpen) {
+          e.preventDefault();
+          const href = logo.getAttribute("href");
+          handleToggle(href);
+        }
+      });
+
+      links.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          const href = link.getAttribute("href");
+          if (href && href.startsWith("/")) {
+            e.preventDefault();
+            handleToggle(href);
+          }
+        });
+      });
+
+      // Close menu automatically if resized to desktop width
+      window.addEventListener("resize", () => {
+        if (window.innerWidth >= 768 && isOpen) {
+          handleToggle();
+        }
+      });
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", initMenu);
+  document.addEventListener("astro:page-load", initMenu);
+</script>
+
+
+
+
+
+
+
