@@ -13,8 +13,7 @@ export function initSmoothScroll() {
   gsap.registerPlugin(ScrollTrigger);
 
   const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    lerp: 0.05
   });
 
   // Store the ticker function on the lenis object so we can reference it for removal later

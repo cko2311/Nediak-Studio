@@ -2,6 +2,7 @@
 import { Font } from "astro:assets";
 import { SEO } from "astro-seo";
 import { ClientRouter } from "astro:transitions";
+
 export interface Props {
   seo: {
     title: string;
@@ -35,6 +36,18 @@ const twitterHandle = defaultOG.twitterHandle;
 
 <head>
   <meta charset="UTF-8" />
+  <script
+    is:inline
+    async
+    src="https://www.googletagmanager.com/gtm.js?id=GTM-TV325P9H"
+  ></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
