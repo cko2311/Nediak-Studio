@@ -164,4 +164,8 @@
   .privacy-pol {
     @apply text-fluid-4xl text-dark font-sans font-bold leading-[1.125];
   }
+
+  .privacy-inner {
+    @apply flex flex-col gap-fluid-sm;
+  }
 }
