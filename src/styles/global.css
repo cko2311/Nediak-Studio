@@ -168,4 +168,8 @@
   .privacy-inner {
     @apply flex flex-col gap-fluid-sm;
   }
+
+  .accessibility-inner {
+    @apply flex flex-col gap-fluid-sm;
+  }
 }

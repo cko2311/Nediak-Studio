@@ -1,0 +1,149 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import H1Animate from "@/components/H1Animate.astro";
+
+interface Props {
+  companyName?: string;
+  websiteUrl?: string;
+  contactEmail?: string;
+  effectiveDate?: string;
+}
+
+const {
+  companyName = "Nediak Studio",
+  websiteUrl = "https://www.nediakstudio.com",
+  contactEmail = "info@nediakstudio.com",
+  effectiveDate = "November 25, 2026"
+} = Astro.props;
+
+const pageCanonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const seoProps = {
+  title: "Privacy | Nediak Studio",
+  description: "Nediak Studio privacy policy",
+  canonical: pageCanonicalUrl
+};
+---
+
+<Layout seo={seoProps}>
+  <section class="w-full h-svh flex justify-center items-center">
+    <div class="px-fluid-md md:px-fluid-xl z-3 w-full space-y-fluid-xl">
+      <div>
+        <H1Animate class="text-fluid-7xl text-center">Accessibility</H1Animate>
+      </div>
+      <div class="space-y-fluid-md">
+        <p>
+          <b>Effective Date: </b>
+          {effectiveDate}
+        </p>
+
+        <p>
+          <span class="font-medium">{companyName} </span>(“we,” “our,” or “us”)
+          is committed to ensuring digital accessibility for people with
+          disabilities. We continually improve the user experience for everyone
+          and apply relevant accessibility standards across{" "}
+          <a href={websiteUrl} class="text-brand">
+            www.nediakstudio.com
+          </a>{" "}
+          (the “Website”).
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="pb-fluid-3xl">
+    <div class="px-fluid-md md:px-fluid-xl space-y-fluid-xl">
+      <div class="accessibility-inner">
+        <h2>1. Conformance Status</h2>
+        <p>
+          We aim to conform to the Web Content Accessibility Guidelines (WCAG)
+          2.2 Level AA standards. These guidelines explain how to make web
+          content more accessible for people with a wide array of disabilities,
+          including visual, auditory, motor, and cognitive impairments.
+        </p>
+      </div>
+      <div class="accessibility-inner">
+        <h2>2. Accessibility Features on Our Website</h2>
+        <p>
+          To support an inclusive browsing experience, we incorporate the
+          following practices into our design and development workflow:
+        </p>
+        <ul class="space-y-fluid-xs">
+          <li>
+            Semantic Structure: Proper use of HTML landmarks, headings, lists,
+            and ARIA attributes to support screen readers and assistive
+            technologies.
+          </li>
+          <li>
+            Keyboard Navigation: Interactive elements, menus, and forms are
+            designed to be navigable via keyboard with visible focus indicators.
+          </li>
+          <li>
+            Color and Contrast: Text and interface components are designed to
+            meet contrast guidelines without relying solely on color to convey
+            meaning.
+          </li>
+          <li>
+            Motion Sensitivity: Animations and transitions respect browser and
+            operating system reduced-motion preferences
+            (prefers-reduced-motion).
+          </li>
+          <li>
+            Alternative Text and Labels: Meaningful alt descriptions for
+            informative images and clear, programmatic labels for form inputs
+            and controls.
+          </li>
+        </ul>
+      </div>
+      <div class="accessibility-inner">
+        <h2>3. Third-Party Content and Tools</h2>
+        <p>
+          While we strive to ensure full accessibility across all pages of our
+          Website, some features rely on third-party platforms and embeds (such
+          as consultation scheduling tools like Cal.com, analytics scripts, or
+          external media). We do not control the underlying code of these
+          third-party services, though we select vendors that prioritize
+          accessible experiences.
+        </p>
+      </div>
+      <div class="accessibility-inner">
+        <h2>4. Ongoing Efforts and Limitations</h2>
+        <p>
+          Accessibility is an ongoing process. As we update our portfolio,
+          publish new case studies, and refine interactive components, we
+          periodically review and test our pages for usability and standards
+          compliance. Despite our best efforts, some content or experimental
+          animations may occasionally present accessibility challenges.
+        </p>
+      </div>
+      <div class="accessibility-inner">
+        <h2>5. Feedback and Assistance</h2>
+        <p>
+          We welcome your feedback on the accessibility of Nediak Studio. If you
+          encounter any accessibility barriers while using our Website or need
+          assistance accessing any information or requesting a project
+          consultation, please contact us:
+        </p>
+        <ul class="space-y-fluid-xs">
+          <li>
+            Email:{" "}
+            <a href={contactEmail} class="text-brand">
+              info@nediakstudio.com
+            </a>
+          </li>
+          <li>
+            Website:{" "}
+            <a href={websiteUrl} class="text-brand">
+              www.nediakstudio.com
+            </a>
+          </li>
+        </ul>
+        <p>
+          When reaching out, please include the web address (URL) of the page
+          you were visiting and a brief description of the issue you
+          experienced. We aim to respond to accessibility feedback within 2–3
+          business days and will work with you to provide the information or
+          service you need in an accessible format.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
